@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "thanhtruong",
+      "password": "123456",
+      "fullname": "Huynh Le Thanh Truong",
+      "email": "truongtecu872002@gmail.com",
+      "phonenumber": "0766558051",
+      "role": 1
+    },
+    {
+      "username": "truong123",
+      "password": "123123123123",
+      "fullname": "huynh le thanh truong",
+      "email": "truongtecu872002@gmail.com",
+      "phonenumber": "0766558051",
+      "id": 2
+    },
+    {
+      "username": "thanhtruong02",
+      "password": "14752555563",
+      "fullname": "huynh le thanh truong",
+      "email": "truongtecu872002@gmail.com",
+      "phonenumber": "0766558051",
+      "id": 3
+    }
+  ]
+}
