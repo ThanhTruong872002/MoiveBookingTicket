@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
 import Button from "../Common/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateUser from "../CreateUser";
 import GetUser from "../LoginUser";
 import { LoginContext } from "../../App";
 
 export default function Input() {
-  const { formData, setFormData } = useContext(LoginContext)!;
+  const { formData, setFormData, setAuthenticated } = useContext(LoginContext)!;
 
   const [checkLogin, setCheckLogin] = useState(false);
-
+  const navigate = useNavigate()
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -20,15 +20,22 @@ export default function Input() {
   };
 
   const handleSummit = async (e: any) => {
+    e.preventDefault();
     if (checkLogin) {
       CreateUser(formData);
     } else if (!checkLogin) {
-      e.preventDefault();
-      GetUser();
+      console.log();
+      const isLogin = await GetUser(formData.username, formData.password)
+      if (isLogin) {
+        navigate("/")
+        setAuthenticated(true)
+      }
+      else {
+        return false
+      }
     }
   };
 
-  console.log(formData);
   return (
     <div>
       <form className="flex flex-col" onSubmit={(e) => handleSummit(e)}>
