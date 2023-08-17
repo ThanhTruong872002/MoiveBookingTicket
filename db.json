@@ -1,0 +1,104 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "thanhtruong",
+      "password": "123456",
+      "fullname": "Huynh Le Thanh Truong",
+      "email": "truongtecu872002@gmail.com",
+      "phonenumber": "0766558051",
+      "role": 1
+    },
+    {
+      "username": "truong123",
+      "password": "123123123123",
+      "fullname": "huynh le thanh truong",
+      "email": "truongtecu872002@gmail.com",
+      "phonenumber": "0766558051",
+      "id": 2
+    }
+  ],
+  "Profile": [],
+  "Movie": [
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/togo_gp03.jpg",
+      "tenphim": "Togo"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/thor-thundertrick-or-treat-scooby-doo-_gp03.jpg",
+      "tenphim": "Thor: ThunderTrick or Treat Scooby-Doo!"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/13-nguoi-song-sot-cuoc-giai-cuu-trong-hang-o-thai-lan_gp03.jpg",
+      "tenphim": "13 người sống sót: Cuộc giải cứu trong hang ở Thái Lan"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/the-sound-of-007_gp03.jpg",
+      "tenphim": "The Sound of 007"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/100-noi-so-cua-toi_gp03.jpg",
+      "tenphim": "100 nổi sợ của tôi"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/chiec-dien-thoai-cua-ngai-harrigan_gp03.jpg",
+      "tenphim": "Chiếc điện thoại của ngài Harrigan"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/tin-nong-depp-heard-ly-di_gp03.jpg",
+      "tenphim": "Tin Nóng: Depp/Heard Ly Dị"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/redeem-team-doi-bong-ro-sieu-sao_gp03.jpg",
+      "tenphim": "Redeem Team: Đội bóng rổ siêu sao"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/phi-cong-sieu-dang-maverick_gp03.jpg",
+      "tenphim": "Phi công siêu đẳng"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/khong_gp03.jpg",
+      "tenphim": "không"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/ke-san-lung-so-hai-tai-sinh_gp03.jpg",
+      "tenphim": "kẻ săn lùng sợ hãi: Tái sinh"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/tuong-nho-nu-hoang_gp03.jpg",
+      "tenphim": "Tưởng nhớ nữ hoàng"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/xa-ngoai-kia-noi-loai-tom-hat_gp03.jpg",
+      "tenphim": "Xa ngoài kia nơi loài tôm hát"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/the-sandman-nguoi-cat_gp03.jpg",
+      "tenphim": "The Sandman: Người cát"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/mortal-kombat-legends-snow-blind_gp03.jpg",
+      "tenphim": "Mortal Kombat Legends: Snow Blind"
+    },
+    {
+      "manhom": "18",
+      "hinhanh": "http://movie0706.cybersoft.edu.vn/hinhanh/lang-lao-nien_gp03.jpg",
+      "tenphim": "Làng lão niên"
+    }
+  ]
+}

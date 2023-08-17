@@ -1,38 +1,37 @@
-import React, { useState } from 'react'
-import Button from '../Common/Button';
-import { Link } from 'react-router-dom';
-import createPost from '../CreateUser';
+import React, { useContext, useState } from "react";
+import Button from "../Common/Button";
+import { Link } from "react-router-dom";
+import CreateUser from "../CreateUser";
+import GetUser from "../LoginUser";
+import { LoginContext } from "../../App";
 
-export default function Input () {
+export default function Input() {
+  const { formData, setFormData } = useContext(LoginContext)!;
 
-     const [formData, setFormData] = useState({
-       username: "",
-       password: "",
-       fullname: "",
-       email: "",
-       phonenumber: "",
-     });
+  const [checkLogin, setCheckLogin] = useState(false);
 
-     const [checkLogin, setCheckLogin] = useState(false)
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
+  const handleLogin = () => {
+    setCheckLogin(!checkLogin);
+  };
 
-     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-       const { name, value } = event.target;
-       setFormData((prev) => ({ ...prev, [name]: value }));
-     };
+  const handleSummit = async (e: any) => {
+    if (checkLogin) {
+      CreateUser(formData);
+    } else if (!checkLogin) {
+      e.preventDefault();
+      GetUser();
+    }
+  };
 
-     const handleLogin = () => {
-        setCheckLogin(!checkLogin)
-     }
-
-     const handleSummit = () => {
-        createPost(formData);
-     }
-
-     console.log(formData);
+  console.log(formData);
   return (
     <div>
-      <form className="flex flex-col" onSubmit={handleSummit}>
+      <form className="flex flex-col" onSubmit={(e) => handleSummit(e)}>
         <input
           value={formData.username}
           onChange={handleOnChange}

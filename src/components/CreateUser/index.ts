@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 type UserProps = {
   username: string;
   password: string;
@@ -6,7 +8,9 @@ type UserProps = {
   phonenumber: string;
 };
 
-function createPost(user: UserProps) {
+function CreateUser(user: UserProps) {
+  // const navigate = useNavigate();
+
   fetch("http://localhost:3000/users", {
     method: "POST",
     headers: {
@@ -16,9 +20,20 @@ function createPost(user: UserProps) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // After successful creation, refresh the post list
+     
     })
     .catch((error) => console.error("Error creating post:", error));
 }
 
-export default createPost;
+// function getUser(user: UserSignin) {
+//   fetch("http://localhost:3000/users"),
+//     {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(user),
+//     }
+// }
+
+export default CreateUser;
