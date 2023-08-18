@@ -1,6 +1,7 @@
 import React, { useState, useContext, Dispatch, SetStateAction } from "react";
 import "./App.css";
 import useRouterElement from "./routes/useRouterElement";
+import { log } from "console";
 
 type FormData = {
   username: string;
@@ -8,6 +9,8 @@ type FormData = {
   fullname: string;
   email: string;
   phonenumber: string;
+  // maNhom: string,
+  // maLoaiNguoiDung:string
 };
 
 type LoginContextType = {
@@ -28,16 +31,20 @@ function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
 
-  const [fullNameLogin, setFullNameLogin] = useState({})
+  const [fullNameLogin, setFullNameLogin] = useState({});
 
-    const [formData, setFormData] = useState({
-      username: "",
-      password: "",
-      fullname: "",
-      email: "",
-      phonenumber: "",
-    });
+  console.log(fullNameLogin);
+  
 
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    fullname: "",
+    email: "",
+    phonenumber: "",
+    // maNhom: "GP01",
+    // maLoaiNguoiDung: "khachHang",
+  });
 
   return (
     <LoginContext.Provider

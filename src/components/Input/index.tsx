@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import Button from "../Common/Button";
 import { Link, useNavigate } from "react-router-dom";
-import CreateUser from "../CreateUser";
-// import GetUser from "../LoginUser";
 import { LoginContext } from "../../App";
 import axios from "axios";
+import { log } from "console";
+import Swal from "sweetalert2";
 
 interface User {
   id: number;
@@ -33,35 +33,54 @@ export default function Input() {
   };
 
   // Handle Login
-  const GetUser = async (username: string, password: string) => {
-    const users = await axios.get("http://localhost:3000/users");
-
-    const foundUser = users?.data.find(
-      (user: User) => user.username === username
-    );
-
-    if (foundUser && foundUser.password === password) {
-      setFullNameLogin(foundUser);
-      console.log(foundUser);
-      
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const handleSummit = async (e: any) => {
     e.preventDefault();
-    if (checkLogin) {
-      CreateUser(formData);
-    } else if (!checkLogin) {
-      const isLogin = await GetUser(formData.username, formData.password);
 
-      if (isLogin) {
+    if (checkLogin) {
+      const res = await axios.post(
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy",
+        {
+          taiKhoan: formData.username,
+          matKhau: formData.password,
+          hoTen: formData.fullname,
+          email: formData.email,
+          soDt: formData.phonenumber,
+          maNhom: "GP01",
+          maLoaiNguoiDung:"KhachHang"
+        }        
+      )
+      .then(function(response) {
+        Swal.fire({
+          icon: "success",
+          title: "Đăng Nhập Thành Công",
+          showConfirmButton: false,
+          timer: 2000
+        })
+        console.log(response);
+        
+      })  
+      .catch(function(error) {
+        Swal.fire({
+          icon: "error",
+          title: "Đăng Kí Thất Bại",
+          showConfirmButton: false,
+          text: error.response.data,
+          timer: 2000,
+        });
+      })
+    } else if (!checkLogin) {
+      const res = await axios.post(
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+        {
+          taiKhoan: formData.username,
+          matKhau: formData.password,
+        }
+      );
+      if (res.data) {
         navigate("/");
+        setFullNameLogin(res.data);
         setAuthenticated(true);
-      } else {
-        return false;
       }
     }
   };
