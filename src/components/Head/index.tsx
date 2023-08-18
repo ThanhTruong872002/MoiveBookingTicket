@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { LocationIcon } from "../Common/Icons";
 import { useNavigate } from "react-router-dom";
+import { LoginContext } from "../../App";
 
 export default function Header() {
+  const navigate = useNavigate();  
 
-  const navigate = useNavigate();
+  const { authenticated, fullNameLogin } = useContext(LoginContext)!;
+
+  console.log(fullNameLogin.fullname);
+
 
   const handleClick = () => {
-      navigate("/SignIn")
-  }
+    navigate("/SignIn");
+  };
 
   return (
     <div className="container">
@@ -33,7 +38,12 @@ export default function Header() {
               alt="avatar"
               className="w-[30px] h-[30px] rounded-[50%] mr-[10px]"
             />
-            <h2 className="cursor-pointer hover:opacity-[0.6]" onClick={handleClick}>Đăng Nhập</h2>
+            <h2
+              className="cursor-pointer hover:opacity-[0.6]"
+              onClick={handleClick}
+            >
+              {authenticated ? fullNameLogin.fullname : "Đăng Nhập"}
+            </h2>
             <div className="w-[1px] h-[30px] border-[1px] border-solid text-[#ccc]"></div>
             <LocationIcon />
             <h2>Đà Nẵng</h2>

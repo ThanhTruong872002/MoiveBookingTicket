@@ -15,6 +15,8 @@ type LoginContextType = {
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  fullNameLogin: any;
+  setFullNameLogin: React.Dispatch<React.SetStateAction<any>>;
 };
 
 export const LoginContext = React.createContext<LoginContextType | undefined>(
@@ -25,6 +27,8 @@ function App() {
   const routerElement = useRouterElement();
 
   const [authenticated, setAuthenticated] = useState(false);
+
+  const [fullNameLogin, setFullNameLogin] = useState({})
 
     const [formData, setFormData] = useState({
       username: "",
@@ -42,6 +46,8 @@ function App() {
         setAuthenticated,
         formData,
         setFormData,
+        fullNameLogin,
+        setFullNameLogin,
       }}
     >
       <div>{routerElement}</div>

@@ -1,27 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 
-type Movie = {
-  manhom: string,
-  tenphim: string,
-  hinhanh: any
-}
 
 export default function Film() {
 
-  function GetMovie() {
-  fetch("http://localhost:3000/Movie")
-    .then((response) => response.json())
-    .then((data:Movie[]) => {
-        console.log(data);
-              
-    });
-  }
-
-    GetMovie()
+  
 
   return (
     <div className="h-[5000px] container">
