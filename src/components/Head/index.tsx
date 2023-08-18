@@ -8,9 +8,6 @@ export default function Header() {
 
   const { authenticated, fullNameLogin } = useContext(LoginContext)!;
 
-  console.log(fullNameLogin.fullname);
-
-
   const handleClick = () => {
     navigate("/SignIn");
   };
@@ -42,7 +39,7 @@ export default function Header() {
               className="cursor-pointer hover:opacity-[0.6]"
               onClick={handleClick}
             >
-              {authenticated ? fullNameLogin.fullname : "Đăng Nhập"}
+              {authenticated ? <div className="text-[#2b9c31f9]">{fullNameLogin.fullname}</div> : "Đăng Nhập"}
             </h2>
             <div className="w-[1px] h-[30px] border-[1px] border-solid text-[#ccc]"></div>
             <LocationIcon />

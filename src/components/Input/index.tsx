@@ -2,8 +2,18 @@ import React, { useContext, useState } from "react";
 import Button from "../Common/Button";
 import { Link, useNavigate } from "react-router-dom";
 import CreateUser from "../CreateUser";
-import GetUser from "../LoginUser";
+// import GetUser from "../LoginUser";
 import { LoginContext } from "../../App";
+import axios from "axios";
+
+interface User {
+  id: number;
+  username: string;
+  password: string;
+  fullname: string;
+  email: string;
+  phonenumber: string;
+}
 
 export default function Input() {
   const navigate = useNavigate();
@@ -22,6 +32,24 @@ export default function Input() {
     setCheckLogin(!checkLogin);
   };
 
+  // Handle Login
+  const GetUser = async (username: string, password: string) => {
+    const users = await axios.get("http://localhost:3000/users");
+
+    const foundUser = users?.data.find(
+      (user: User) => user.username === username
+    );
+
+    if (foundUser && foundUser.password === password) {
+      setFullNameLogin(foundUser);
+      console.log(foundUser);
+      
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const handleSummit = async (e: any) => {
     e.preventDefault();
     if (checkLogin) {
@@ -30,7 +58,7 @@ export default function Input() {
       const isLogin = await GetUser(formData.username, formData.password);
 
       if (isLogin) {
-        navigate("/");        
+        navigate("/");
         setAuthenticated(true);
       } else {
         return false;
