@@ -38,49 +38,55 @@ export default function Input() {
     e.preventDefault();
 
     if (checkLogin) {
-      const res = await axios.post(
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy",
-        {
+      const res = await axios
+        .post("https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy", {
           taiKhoan: formData.username,
           matKhau: formData.password,
           hoTen: formData.fullname,
           email: formData.email,
           soDt: formData.phonenumber,
           maNhom: "GP01",
-          maLoaiNguoiDung:"KhachHang"
-        }        
-      )
-      .then(function(response) {
-        Swal.fire({
-          icon: "success",
-          title: "Đăng Nhập Thành Công",
-          showConfirmButton: false,
-          timer: 2000
+          maLoaiNguoiDung: "KhachHang",
         })
-        console.log(response);
-        
-      })  
-      .catch(function(error) {
+        .then(function (response) {
+          Swal.fire({
+            icon: "success",
+            title: "Đăng Kí Thành Công",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        })
+        .catch(function (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Đăng Kí Thất Bại",
+            showConfirmButton: false,
+            text: error.response.data,
+            timer: 2000,
+          });
+        });
+    } else if (!checkLogin) {
+      try {
+        const res = await axios.post(
+          "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+          {
+            taiKhoan: formData.username,
+            matKhau: formData.password,
+          }
+        );
+        if (res.data) {
+          navigate("/");
+          setFullNameLogin(res.data);
+          setAuthenticated(true);
+        }
+      } catch (error) {
         Swal.fire({
           icon: "error",
-          title: "Đăng Kí Thất Bại",
-          showConfirmButton: false,
-          text: error.response.data,
-          timer: 2000,
+          title: "Đăng Nhập Thất Bại",
+          // showConfirmButton: false,
+          text: "Tài khoản hoặc mật khẩu không chính xác",
+          timer: 5000,
         });
-      })
-    } else if (!checkLogin) {
-      const res = await axios.post(
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
-        {
-          taiKhoan: formData.username,
-          matKhau: formData.password,
-        }
-      );
-      if (res.data) {
-        navigate("/");
-        setFullNameLogin(res.data);
-        setAuthenticated(true);
       }
     }
   };
