@@ -17,7 +17,7 @@ export default function SimpleSlider() {
   };
 
   return (
-    <div className="mt-9">
+    <div className="mt-28">
       <Slider {...settings}>
         <div>
           <img

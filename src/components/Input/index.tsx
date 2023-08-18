@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../Common/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../../App";
@@ -6,14 +6,14 @@ import axios from "axios";
 import { log } from "console";
 import Swal from "sweetalert2";
 
-interface User {
-  id: number;
-  username: string;
-  password: string;
-  fullname: string;
-  email: string;
-  phonenumber: string;
-}
+// interface User {
+//   id: number;
+//   username: string;
+//   password: string;
+//   fullname: string;
+//   email: string;
+//   phonenumber: string;
+// }
 
 export default function Input() {
   const navigate = useNavigate();
@@ -31,6 +31,19 @@ export default function Input() {
   const handleLogin = () => {
     setCheckLogin(!checkLogin);
   };
+
+  //Local Storage
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    const storedAccessToken = localStorage.getItem("acesstoken");
+
+    console.log(storedAccessToken);
+
+    if (storedUsername && storedAccessToken) {
+      setAuthenticated(true);
+    }
+  }, []);
 
   // Handle Login
 
@@ -75,15 +88,20 @@ export default function Input() {
           }
         );
         if (res.data) {
+          console.log(res.data);
+
           navigate("/");
           setFullNameLogin(res.data);
           setAuthenticated(true);
+
+          localStorage.setItem("username", res.data.taiKhoan);
+          localStorage.setItem("acesstoken", res.data.accessToken);
         }
       } catch (error) {
         Swal.fire({
           icon: "error",
           title: "Đăng Nhập Thất Bại",
-          // showConfirmButton: false,
+          showConfirmButton: false,
           text: "Tài khoản hoặc mật khẩu không chính xác",
           timer: 5000,
         });

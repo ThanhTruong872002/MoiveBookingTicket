@@ -1,15 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { LocationIcon } from "../Common/Icons";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../App";
+import Tippy from "@tippyjs/react";
+import LogOut from "../LogOut";
 
 export default function Header() {
   const navigate = useNavigate();
+
+  const [showPopupLogOut, setShowPopupLogOut] = useState(false);
 
   const { authenticated, fullNameLogin } = useContext(LoginContext)!;
 
   const handleClick = () => {
     navigate("/SignIn");
+  };
+
+  const handleOnMouseEnter = () => {
+    setShowPopupLogOut(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowPopupLogOut(false);
   };
 
   return (
@@ -43,14 +55,28 @@ export default function Header() {
               />
             )}
 
-            <h2
-              className="cursor-pointer hover:opacity-[0.6]"
-              onClick={handleClick}
-            >
+            <h2 className="cursor-pointer hover:opacity-[0.9]">
               {authenticated ? (
-                <div className="text-[#2b9c31f9]">{fullNameLogin.hoTen}</div>
+                <>
+                  <div className="relative">
+                    <div
+                      className="text-[#2b9c31f9] z-[100]"
+                      onMouseMove={handleOnMouseEnter}
+                    >
+                      {fullNameLogin.hoTen}
+                    </div>
+                    {showPopupLogOut && (
+                      <div
+                        onMouseLeave={handleMouseLeave}
+                        className="absolute z-[100] bg-white rounded-[5px] mt-2 right-[-14%] shadow-[0px_7px_20px_3px_rgba(0,0,0,0.75)]"
+                      >
+                        <LogOut />
+                      </div>
+                    )}
+                  </div>
+                </>
               ) : (
-                "Đăng Nhập"
+                <div onClick={handleClick}>Đăng Nhập</div>
               )}
             </h2>
             <div className="w-[1px] h-[30px] border-[1px] border-solid text-[#ccc]"></div>
