@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Button from "../Common/Button";
 import { Link, useNavigate } from "react-router-dom";
 import CreateUser from "../CreateUser";
-import GetUser from "../LoginUser";
+import GetUser from "../HandleLogin";
 import { LoginContext } from "../../App";
 
 export default function Input() {

@@ -1,6 +1,3 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../../App";
 import axios from "axios";
 
 interface User {
