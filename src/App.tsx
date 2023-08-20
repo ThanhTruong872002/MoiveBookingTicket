@@ -1,50 +1,65 @@
-import React, { useState, useContext, Dispatch, SetStateAction } from "react";
-import "./App.css";
-import useRouterElement from "./routes/useRouterElement";
-import { log } from "console";
+import React, { useState } from 'react'
+import { IUser } from './@types/User'
+import './App.css'
+import useRouterElement from './routes/useRouterElement'
+import { getAccessTokenFromLS, getProfileFromLS } from './utils/auth'
 
 type FormData = {
-  username: string;
-  password: string;
-  fullname: string;
-  email: string;
-  phonenumber: string;
+  username: string
+  password: string
+  fullname: string
+  email: string
+  phonenumber: string
   // maNhom: string,
   // maLoaiNguoiDung:string
-};
-
+}
+const initFormData = {
+  username: '',
+  password: '',
+  fullname: '',
+  email: '',
+  phonenumber: ''
+}
 type LoginContextType = {
-  authenticated: boolean;
-  setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-  fullNameLogin: any;
-  setFullNameLogin: React.Dispatch<React.SetStateAction<any>>;
-};
+  authenticated: boolean
+  setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+  formData: FormData
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>
+  fullNameLogin: any
+  setFullNameLogin: React.Dispatch<React.SetStateAction<any>>
+  profile: IUser | null
+  setProfile: React.Dispatch<React.SetStateAction<IUser | null>>
+}
 
-export const LoginContext = React.createContext<LoginContextType | undefined>(
-  undefined
-);
+const initialAppContext: LoginContextType = {
+  authenticated: Boolean(getAccessTokenFromLS()),
+  setAuthenticated: () => null,
+  profile: getProfileFromLS(),
+  setProfile: () => null,
+  formData: initFormData,
+  fullNameLogin: '',
+  setFullNameLogin: () => null,
+  setFormData: () => null
+}
+export const LoginContext = React.createContext<LoginContextType>(initialAppContext)
 
 function App() {
-  const routerElement = useRouterElement();
+  const routerElement = useRouterElement()
 
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(initialAppContext.authenticated)
 
-  const [fullNameLogin, setFullNameLogin] = useState({});
+  const [fullNameLogin, setFullNameLogin] = useState({})
 
-  console.log(fullNameLogin);
-  
+  const [profile, setProfile] = useState<IUser | null>(initialAppContext.profile)
 
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    fullname: "",
-    email: "",
-    phonenumber: "",
-    // maNhom: "GP01",
-    // maLoaiNguoiDung: "khachHang",
-  });
+    username: '',
+    password: '',
+    fullname: '',
+    email: '',
+    phonenumber: ''
+  })
+  console.log("🚀 ~ file: App.tsx:44 ~ initialAppContext: LoginContextType.authenticated:", authenticated)
 
   return (
     <LoginContext.Provider
@@ -55,11 +70,13 @@ function App() {
         setFormData,
         fullNameLogin,
         setFullNameLogin,
+        profile,
+        setProfile
       }}
     >
       <div>{routerElement}</div>
     </LoginContext.Provider>
-  );
+  )
 }
 
-export default App;
+export default App
