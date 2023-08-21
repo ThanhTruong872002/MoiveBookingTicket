@@ -25,3 +25,47 @@
   border-radius: 4px;
   font-weight: 500;
 }
+
+.btnLogin {
+  width: 130px;
+  height: 37px;
+  background-color: #54ab35;
+  font-size: 18px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.btnShowingFilm {
+  width: 285px;
+  height: 67px;
+  font-size: 3rem;
+  padding: 7px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 3px solid #fff;
+  border-radius: 35px;
+  background: rgba(255, 255, 255, 0);
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.btnShowingFilm:hover {
+  color: #ffffff;
+  background-color: #ff5400;
+  border: 3px solid #ff5400;
+  font-weight: bold;
+}
+
+.btnSearchFilm {
+  width: 200px;
+  height: 60px;
+  border-radius: 35px;
+  background-color: #d3d343;
+  pointer-events: none;
+}

@@ -1,9 +1,10 @@
 import React from 'react'
+import Button from '../Common/Button'
 
 export default function SearchFilm() {
   return (
-    <div>
-      <h2 className='flex justify-center mb-[20px] text-[2.2rem] font-[600] text-[#23966c] '>TÌM KIẾM PHIM</h2>
+    <div className='p-28 pb-0'>
+    <div className='flex justify-center mb-8'>  <Button btnSearchFilm>TÌM KIẾM PHIM</Button></div>
       <div>
         <input
           type='text'

@@ -15,10 +15,10 @@ export default function LogOut() {
   return (
     <div>
       <div className='flex flex-col justify-center items-center  w-[170px] h-[88px]'>
-        <Link to='#' className='text-[1.5rem] hover:bg-[#fb4226] py-4 px-4 hover:text-[white] hover:w-[100%]'>
+        <Link to='#' className='text-[1.5rem] hover:bg-[#fb4226] py-2 px-4 hover:text-[white] hover:w-[100%]'>
           Thông tin tài khoản{' '}
         </Link>
-        <div className='flex items-center gap-4 hover:bg-[#fb4226] pt-4 px-4 hover:text-[white] hover:w-[100%] ' onClick={handleLogout}>
+        <div className='flex items-center gap-4 hover:bg-[#fb4226]  px-4 hover:text-[white] hover:w-[100%] ' onClick={handleLogout}>
           <Link to='#' className='text-[1.5rem] '>
             Đăng xuất
           </Link>

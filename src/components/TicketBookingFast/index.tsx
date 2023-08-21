@@ -4,8 +4,8 @@ import { CheveronDown } from '../Common/Icons'
 export default function TicketBookingFast() {
   return (
     <div className='container'>
-      <div className='flex justify-between items-center w-[960px] h-[80px] mx-auto bg-white relative top-[-40px] rounded-[5px] drop-shadow-5xl gap-10 px-5'>
-        <div className='flex justify-between items-center w-[320px] h-[68px]'>
+      <div className='flex justify-between items-center w-[960px] h-[80px] mx-auto bg-white relative top-[-40px] rounded-[5px] drop-shadow-5xl gap-10 px-5 text-[1.8rem] font-[500]'>
+        <div className='flex justify-between items-center w-[320px] h-[68px] '>
           <h2>Phim</h2>
           <CheveronDown />
         </div>

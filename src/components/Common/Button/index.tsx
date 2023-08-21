@@ -4,19 +4,24 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-interface ButtonProps{
+interface ButtonProps {
   children: ReactNode
   className?: any
   small?: boolean
   primary?: boolean
+  btnLogin?: boolean
+  btnShowingFilm?: boolean
+  btnSearchFilm? :boolean
 }
 
-const Button: FC<ButtonProps> = ({ children, primary, small, className }) => {
-
+const Button: FC<ButtonProps> = ({ children, primary, small, className, btnLogin, btnShowingFilm, btnSearchFilm }) => {
   const classes = cx('primary', {
     [className]: className,
     primary,
-    small
+    small,
+    btnLogin,
+    btnShowingFilm,
+    btnSearchFilm
   })
 
   return (

@@ -11,9 +11,11 @@ export default function Home() {
       <div>
         <Header />
         <Hero />
-        <TicketBookingFast />
-        <SearchFilm />
-        <Film />
+        <div className='bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")]'>
+          <TicketBookingFast />
+          <SearchFilm />
+          <Film />
+        </div>
       </div>
     </div>
   )

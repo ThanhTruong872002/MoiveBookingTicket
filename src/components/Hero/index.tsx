@@ -17,34 +17,34 @@ export default function SimpleSlider() {
   }
 
   return (
-    <div className='mt-28'>
+    <div>
       <Slider {...settings}>
         <div>
           <img
-            src='https://cybersoft-movie-phutran.web.app/static/media/sliderkm4.19113c07.jpg'
+            src=' https://www.bhdstar.vn/wp-content/uploads/2018/03/1920x1080-2-2.jpg'
             alt=''
-            className='h-[600px] w-[100%] object-cover'
+            className='h-[100vh] w-[100%] object-cover'
           />
         </div>
         <div>
           <img
-            src='https://cybersoft-movie-phutran.web.app/static/media/sliderkm3.41d81f51.jpg'
+            src='https://www.bhdstar.vn/wp-content/uploads/2018/03/1920x1080-11.jpg'
             alt=''
-            className='h-[600px] w-[100%] object-cover'
+            className='h-[100vh] w-[100%] object-cover'
           />
         </div>
         <div>
           <img
-            src='https://cybersoft-movie-phutran.web.app/static/media/sliderkm.45e0b4c4.jpg'
+            src='https://www.bhdstar.vn/wp-content/uploads/2018/03/DEAL-1K-1920x1080.png'
             alt=''
-            className='h-[600px] w-[100%] object-cover'
+            className='h-[100vh] w-[100%] object-cover'
           />
         </div>
         <div>
           <img
-            src='https://cybersoft-movie-phutran.web.app/static/media/sliderkm1.c6a9fe27.png'
+            src='https://www.bhdstar.vn/wp-content/uploads/2018/03/1920X1080-MI7.jpg'
             alt=''
-            className='h-[600px] w-[100%] object-cover'
+            className='h-[100vh] w-[100%] object-cover'
           />
         </div>
       </Slider>
