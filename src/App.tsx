@@ -3,6 +3,8 @@ import { IUser } from './@types/User'
 import './App.css'
 import useRouterElement from './routes/useRouterElement'
 import { getAccessTokenFromLS, getProfileFromLS } from './utils/auth'
+import { any } from 'prop-types'
+import { FilmItem } from './@types/Film'
 
 type FormData = {
   username: string
@@ -10,9 +12,25 @@ type FormData = {
   fullname: string
   email: string
   phonenumber: string
-  // maNhom: string,
-  // maLoaiNguoiDung:string
 }
+
+const initFilmData: FilmItem[] = [
+{
+  maPhim: "",
+  tenPhim: "",
+  biDanh: "",
+  trailer: null,
+  hinhAnh: null,
+  moTa: "",
+  maNhom: "",
+  ngayKhoiChieu: null,
+  danhGia: null,
+  hot: null,
+  dangchieu: any,
+  sapchieu: any
+}
+]
+
 const initFormData = {
   username: '',
   password: '',
@@ -25,10 +43,10 @@ type LoginContextType = {
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
   formData: FormData
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
-  fullNameLogin: any
-  setFullNameLogin: React.Dispatch<React.SetStateAction<any>>
   profile: IUser | null
   setProfile: React.Dispatch<React.SetStateAction<IUser | null>>
+  filmData: FilmItem[]
+  setFilmData: React.Dispatch<React.SetStateAction<FilmItem[]>>
 }
 
 const initialAppContext: LoginContextType = {
@@ -37,9 +55,9 @@ const initialAppContext: LoginContextType = {
   profile: getProfileFromLS(),
   setProfile: () => null,
   formData: initFormData,
-  fullNameLogin: '',
-  setFullNameLogin: () => null,
-  setFormData: () => null
+  setFormData: () => null,
+  filmData: initFilmData,
+  setFilmData: () => null
 }
 export const LoginContext = React.createContext<LoginContextType>(initialAppContext)
 
@@ -48,9 +66,10 @@ function App() {
 
   const [authenticated, setAuthenticated] = useState(initialAppContext.authenticated)
 
-  const [fullNameLogin, setFullNameLogin] = useState({})
-
   const [profile, setProfile] = useState<IUser | null>(initialAppContext.profile)
+
+  const [filmData, setFilmData] = useState<FilmItem[]>(initialAppContext.filmData)
+
 
   const [formData, setFormData] = useState({
     username: '',
@@ -59,7 +78,8 @@ function App() {
     email: '',
     phonenumber: ''
   })
-  console.log("🚀 ~ file: App.tsx:44 ~ initialAppContext: LoginContextType.authenticated:", authenticated)
+  
+
 
   return (
     <LoginContext.Provider
@@ -68,10 +88,10 @@ function App() {
         setAuthenticated,
         formData,
         setFormData,
-        fullNameLogin,
-        setFullNameLogin,
         profile,
-        setProfile
+        setProfile,
+        filmData,
+        setFilmData
       }}
     >
       <div>{routerElement}</div>

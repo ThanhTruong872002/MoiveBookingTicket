@@ -10,7 +10,7 @@ export default function LogOut() {
     clearAccessToken()
     setProfile(null)
     setAuthenticated(false)
-    navigate("/")
+    navigate("/Signin")
   }
   return (
     <div>

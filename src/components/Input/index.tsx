@@ -10,7 +10,7 @@ import Button from '../Common/Button'
 export default function Input() {
   const navigate = useNavigate()
 
-  const { formData, setFormData, setAuthenticated, setFullNameLogin, setProfile } = useContext(LoginContext)!
+  const { formData, setFormData, setAuthenticated, setProfile } = useContext(LoginContext)!
 
   const [checkLogin, setCheckLogin] = useState(false)
 
@@ -79,7 +79,6 @@ export default function Input() {
           console.log(res.data)
 
           navigate('/')
-          setFullNameLogin(res.data)
           setAuthenticated(true)
           setProfile(res.data)
           localStorage.setItem(

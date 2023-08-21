@@ -1,66 +1,109 @@
-import React, { useEffect, useState } from 'react'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import './style.css'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import { LoginContext } from '../../App'
+import { FilmItem } from '../../@types/Film'
+import LazyLoad from 'react-lazyload'
+import Button from '../Common/Button'
+import styles from './FIlm.module.scss'
+import classNames from 'classnames/bind'
 
-interface FilmItem {
-  manhom: string
-  hinhanh: string
-  tenphim: string
-}
+const cx = classNames.bind(styles)
 
 export default function Film() {
-  const [filmData, setFilmData] = useState<FilmItem[]>([])
+  const { filmData, setFilmData } = useContext(LoginContext)
 
-  console.log(filmData)
+  const [statusFilm, setStatusFilm] = useState(true)
 
-  const getFilmData = async () => {
-    try {
-      const res = await axios.get('http://localhost:3000/Movie')
-      if (res.data) {
-        setFilmData(res.data)
-      }
-    } catch (error) {
-      console.error('Error', error)
-    }
+  const [actionBtn, setActionBtn] = useState<boolean[]>(Array(filmData.length).fill(false))
+
+  console.log('filmData', filmData)
+
+  const handleMovieShowing = () => {
+    setStatusFilm(true)
+  }
+
+  const handleMovieComming = () => {
+    setStatusFilm(false)
+  }
+
+  const hanldeOnMouseEnter = (index: number) => {
+    const updatedHoverItems = [...actionBtn]
+    updatedHoverItems[index] = true
+    setActionBtn(updatedHoverItems)
+  }
+
+  const handleOnMouseLeave = (index: number) => {
+    const updatedHoverItems = [...actionBtn]
+    updatedHoverItems[index] = false
+    setActionBtn(updatedHoverItems)
   }
 
   useEffect(() => {
-    getFilmData()
-  }, [])
+    if (statusFilm) {
+      const getFilmData = async () => {
+        const res = await axios.get('https://movieapi.cyberlearn.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01')
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000
-  }
+        if (res.data) {
+          setFilmData(res.data?.content)
+        }
+      }
+      getFilmData()
+    } else if (!statusFilm) {
+      const getFilmDataCommingSoon = async () => {
+        const res = await axios.get('https://movieapi.cyberlearn.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP02')
+        if (res.data) {
+          setFilmData(res.data?.content)
+        }
+      }
+      getFilmDataCommingSoon()
+    }
+  }, [statusFilm])
 
   return (
     <div className='h-[5000px] container'>
       <div className='flex justify-center gap-8 mt-20'>
-        <h2 className='font-[600] text-[2.5rem] text-[#23966c] cursor-pointer hover:opacity-[.7]'>Đang Chiếu</h2>
-        <h2 className='font-[600] text-[2.5rem] text-[#23966c] cursor-pointer hover:opacity-[.7]'>Sắp Chiếu</h2>
+        <h2
+          className='font-[600] text-[2.5rem] text-[#23966c] cursor-pointer hover:opacity-[.7]'
+          onClick={handleMovieShowing}
+        >
+          Đang Chiếu
+        </h2>
+        <h2
+          className='font-[600] text-[2.5rem] text-[#23966c] cursor-pointer hover:opacity-[.7]'
+          onClick={handleMovieComming}
+        >
+          Sắp Chiếu
+        </h2>
       </div>
 
       <div className='w-[1000px] grid grid-cols-4 gap-8 mt-[50px] mx-auto'>
-        {filmData.map((film) => (
-          <Slider {...settings}>
-            <div>
-              <img src={`${film.hinhanh}`} alt='' className='block w-[230px] h-[350px] rounded-[4px]' />
-              <div className='flex gap-3 items-center mt-5'>
-                <div className='bg-[#fb4226] text-center mr-[8px] py-[5px] text-[#fff] w-[36px] rounded-[4px] mt-[10px] font-[600]'>
-                  {film.manhom}
-                </div>
-                <h2 className='text-[1.8rem] font-[600] flex justify-center items-center'>{film.tenphim}</h2>
+        {filmData.map((film: FilmItem, index: number) => (
+          <div key={index} onMouseMove={() => hanldeOnMouseEnter(index)} onMouseOut={() => handleOnMouseLeave(index)}>
+            <LazyLoad>
+              <img
+                src={`${film.hinhAnh}`}
+                alt=''
+                className='block w-[230px] h-[350px] rounded-[4px] object-cover cursor-pointer'
+                onError={(event) => {
+                  event.currentTarget.src =
+                    'https://th.bing.com/th/id/R.815ba06ac795a89cfc979687071be296?rik=gltXSX1%2bzm8Qhw&pid=ImgRaw&r=0'
+                }}
+              />
+            </LazyLoad>
+
+            <div className='flex gap-3 items-center mt-5'>
+              <div className='bg-[#fb4226] text-center mr-[8px] py-[5px] text-[#fff] w-auto p-2 rounded-[4px] mt-[10px] font-[600]'>
+                {film.maNhom}
               </div>
+              <h2 className='text-[1.6rem] font-[600] flex justify-center items-center'>{film.tenPhim}</h2>
+
+              {actionBtn[index] && (
+                <div className={cx('absolute -translate-y-4 movie-action')}>
+                  <Button small>MUA VÉ</Button>
+                </div>
+              )}
             </div>
-          </Slider>
+          </div>
         ))}
       </div>
     </div>
