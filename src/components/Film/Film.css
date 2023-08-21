@@ -1,0 +1,19 @@
+.movie-item {}
+
+
+.icon-play {
+  transition: all ease .7s;
+  opacity: 0;
+}
+
+.movie-item:hover .icon-play {
+  opacity: 1;
+}
+
+.movie-item:hover .btn-booking {
+  margin-left: 0;
+}
+
+.btn-booking {
+  transition: all ease .7s;
+}

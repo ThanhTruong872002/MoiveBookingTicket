@@ -3,6 +3,7 @@ import Home from '../pages/Home'
 import SignIn from '../pages/Signin'
 import { useContext } from 'react'
 import { LoginContext } from '../App'
+import Details from '../pages/Details'
 // interface RouteObject {
 //   path?: string;
 //   index?: boolean;
@@ -39,6 +40,10 @@ export default function useRouterElement() {
           element: <SignIn />
         }
       ]
+    },
+    {
+      path: '/detail/:id',
+      element: <Details/>
     }
   ])
   return routerElemnts
