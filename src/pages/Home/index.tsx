@@ -1,9 +1,10 @@
-import React from 'react'
-import Header from '../../components/Head'
-import Hero from '../../components/Hero'
-import TicketBookingFast from '../../components/TicketBookingFast'
-import SearchFilm from '../../components/SearchFilm'
-import Film from '../../components/Film'
+import React from "react";
+import Header from "../../components/Head";
+import Hero from "../../components/Hero";
+import TicketBookingFast from "../../components/TicketBookingFast"
+import SearchFilm from "../../components/SearchFilm";
+import Film from "../../components/Film";
+import ShowTime from "../../components/Showtime";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
           <TicketBookingFast />
           <SearchFilm />
           <Film />
+          <ShowTime />
         </div>
       </div>
     </div>
