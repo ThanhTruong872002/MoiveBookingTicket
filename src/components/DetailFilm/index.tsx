@@ -19,26 +19,25 @@ interface IDetailFilm {
 export default function DetailFilm() {
   const [detailFilmData, setDetailFilmData] = useState<IDetailFilm>({
     biDanh: '',
-  danhGia: 0,
-  hinhAnh: '',
-  lichChieu: [],
-  maNhom: '',
-  maPhim: 0,
-  moTa: '',
-  ngayKhoiChieu: '',
-  tenPhim: '',
-  trailer: '',
+    danhGia: 0,
+    hinhAnh: '',
+    lichChieu: [],
+    maNhom: '',
+    maPhim: 0,
+    moTa: '',
+    ngayKhoiChieu: '',
+    tenPhim: '',
+    trailer: ''
   })
 
-  console.log(detailFilmData);
-  
+  console.log(detailFilmData)
 
   const { id } = useParams()
   const GetDetailsData = async () => {
-    const res = await axios.get(`https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`)
+    const res = await axios.get(`https://movieapi.cyberlearn.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`)
 
     if (res.data) {
-      setDetailFilmData(res.data)
+      setDetailFilmData(res.data?.content)
     }
   }
   useEffect(() => {
@@ -53,18 +52,12 @@ export default function DetailFilm() {
           <h2>{detailFilmData.tenPhim}</h2>
         </div>
         <div className='mt-10 flex'>
-          <div className='mr-16'>
-            <img
-              className='w-[360px] h-[536px] object-cover'
-              src={detailFilmData.hinhAnh}
-              alt=''
-            />
+          <div className='mr-16 w-[200%] '>
+            <img className='w-[150%] h-[536px] object-cover' src={detailFilmData.hinhAnh} alt='' />
           </div>
           <div>
-            <h2 className='text-[2.4rem] text-white'>{detailFilmData.tenPhim}</h2>
-            <p className='text-[#a6b2c9] py-5 leading-[2.6rem]'>
-                {detailFilmData.moTa}
-            </p>
+            <h2 className='text-[3rem] text-white uppercase font-bold'>{detailFilmData.tenPhim}</h2>
+            <p className='text-[#a6b2c9] py-5 leading-[2.6rem]'>{detailFilmData.moTa}</p>
             <div className='flex flex-col gap-16'>
               <div className='text-[1.7rem] flex gap-24'>
                 <h2 className='text-[#e8eff5] w-[90px]'>Phân loại</h2>
