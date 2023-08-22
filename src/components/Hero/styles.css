@@ -1,30 +1,31 @@
 .slick-dots {
   position: absolute;
   top: 720px;
-  /* Adjust the vertical position as needed */
 }
 
 .slick-dots li button {
-  width: 20px;
-  /* Set the width of the dot */
+  width: 50px;
+  background-color: #a31111;
   height: 20px;
-  /* Set the height of the dot */
   border-radius: 50%;
-  /* Make the dot round */
   background-color: #bbb;
-  /* Change the background color of the dot */
   opacity: 0.7;
-  /* Adjust the opacity of the dots */
   transition: all 0.3s ease;
-  /* Add a transition effect */
 }
 
 .slick-dots li.slick-active button {
   width: 16px;
-  /* Increase the size of the active dot */
   height: 16px;
-  background-color: #181616;
-  /* Change the color of the active dot */
   opacity: 1;
-  /* Make the active dot fully visible */
+}
+
+.slick-dots li button:before {
+  color: #d4dd29;
+  font-size: 15px;
+}
+
+
+.slick-dots li.slick-active button:before {
+  opacity: .75;
+  color: #d4dd29;
 }

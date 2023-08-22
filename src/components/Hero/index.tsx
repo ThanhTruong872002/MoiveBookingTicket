@@ -23,28 +23,28 @@ export default function SimpleSlider() {
           <img
             src=' https://www.bhdstar.vn/wp-content/uploads/2018/03/1920x1080-2-2.jpg'
             alt=''
-            className='h-[100vh] w-[100%] object-cover'
+            className='h-[100%] w-[100%] object-cover'
           />
         </div>
         <div>
           <img
             src='https://www.bhdstar.vn/wp-content/uploads/2018/03/1920x1080-11.jpg'
             alt=''
-            className='h-[100vh] w-[100%] object-cover'
+            className='h-[100%] w-[100%] object-cover'
           />
         </div>
         <div>
           <img
             src='https://www.bhdstar.vn/wp-content/uploads/2018/03/DEAL-1K-1920x1080.png'
             alt=''
-            className='h-[100vh] w-[100%] object-cover'
+            className='h-[100%] w-[100%] object-cover'
           />
         </div>
         <div>
           <img
             src='https://www.bhdstar.vn/wp-content/uploads/2018/03/1920X1080-MI7.jpg'
             alt=''
-            className='h-[100vh] w-[100%] object-cover'
+            className='h-[100%] w-[100%] object-cover'
           />
         </div>
       </Slider>
