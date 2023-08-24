@@ -1,0 +1,19 @@
+.showTime {
+    scrollbar-width: thin;
+    scrollbar-color: #333 #666;
+}
+
+.showTime::-webkit-scrollbar {
+    width: 2px;
+    /* For Chrome, Safari, and Opera */
+}
+
+.showTime::-webkit-scrollbar-thumb {
+    background-color: #f83838;
+    /* For Chrome, Safari, and Opera */
+}
+
+.showTime::-webkit-scrollbar-track {
+    background-color: rgb(84, 84, 84);
+    /* For Chrome, Safari, and Opera */
+}

@@ -43,8 +43,8 @@ export default function Film() {
     }
   }, [statusFilm])
   return (
-    <div className='pt-20'>
-      <div className='h-[5000px] container  '>
+    <div className='pt-20 mt-36'>
+      <div className='container  '>
         <div className='flex justify-center gap-8 mt-20 '>
           <div onClick={handleMovieShowing}>
             {' '}
