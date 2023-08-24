@@ -25,7 +25,6 @@
     "scss": "^0.2.4",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.7.23",
-    "tw-elements": "^1.0.0-beta3",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

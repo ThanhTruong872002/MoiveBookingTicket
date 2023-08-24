@@ -11,7 +11,7 @@ export default function Header() {
   const [showPopupLogOut, setShowPopupLogOut] = useState(false)
 
   const { authenticated, profile } = useContext(LoginContext)!
-  console.log('profile?.hoTen', profile?.hoTen)
+  // console.log('profile?.hoTen', profile?.hoTen)
 
   const handleClick = () => {
     navigate('/SignIn')
