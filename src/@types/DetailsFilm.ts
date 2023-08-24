@@ -35,7 +35,7 @@ export interface Phim {
 }
 
 
-export const data: Phim = {
+export const data: Phim= {
   heThongRapChieu: [
     {
       cumRapChieu: [

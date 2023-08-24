@@ -70,13 +70,13 @@ const ShowTime = () => {
 
   return (
    <div className='container'>
-        <div className='showTime h-auto  my-[200px]'>
+        <div className='showTime h-[700px]  my-[200px]'>
           <div className='flex h-full bg-white border-2 border-white border-solid overflow-y-hidden py-10'>
             <div className='flex flex-col w-[12%] border-r-gray-500 border-r-2 border-solid'>
               {cumRap.map((tab, index) => (
                 <div
                   key={index}
-                  className={`py-4 px-5 ${index === activeTab ? 'border-e-4 border-red-600 border-solid' : ''}`}
+                  className={`py-4 px-5 cursor-pointer ${index === activeTab ? 'border-e-4 border-red-600 border-solid' : ''}`}
                   onClick={() => {
                     setActiveTab(index)
                     setActiveTab2(0)
@@ -89,7 +89,7 @@ const ShowTime = () => {
             <div className='flex w-[88%]'>
               <div className='showTime h-full w-[35%] flex flex-col overflow-y-scroll'>
                 {cumRap[activeTab].lstCumRap.map((tab, index) => (
-                  <div key={index} className='h-[79px]'>
+                  <div key={index} className='cursor-pointer h-[79px]'>
                     <div
                       key={index}
                       className={`p-4 flex items-center ${
@@ -112,7 +112,7 @@ const ShowTime = () => {
               <div className='showTime flex flex-col h-full w-[65%] px-[20px] overflow-y-scroll'>
                 {cumRap[activeTab].lstCumRap[activeTab2].danhSachPhim.slice(0, 5).map((phim, index) => (
                   <div
-                    className='flex flex-col gap-4 py-4 border-b-2 border-gray-500 border-solid transition-height duration-300'
+                    className='cursor-pointer flex flex-col gap-4 py-4 border-b-2 border-gray-500 border-solid transition-height duration-300'
                     key={index}
                   >
                     <Expandable baseHeight='70px' expandedHeight='200px'>
