@@ -4,6 +4,7 @@ import Hero from '../../components/Hero'
 import TicketBookingFast from '../../components/TicketBookingFast'
 import SearchFilm from '../../components/SearchFilm'
 import Film from '../../components/Film'
+import Footer from '../../components/Footer'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
           <TicketBookingFast />
           <SearchFilm />
           <Film />
+          <Footer/>
         </div>
       </div>
     </div>

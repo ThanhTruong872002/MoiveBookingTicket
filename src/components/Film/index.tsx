@@ -25,10 +25,10 @@ export default function Film() {
   useEffect(() => {
     if (statusFilm) {
       const getFilmData = async () => {
-        const res = await axios.get('https://movieapi.cyberlearn.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01')
+        const res = await axios.get('https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP03')
 
-        if (res.data) {
-          setFilmData(res.data?.content)
+        if (res) {
+          setFilmData(res.data)
         }
       }
       getFilmData()
@@ -43,7 +43,7 @@ export default function Film() {
     }
   }, [statusFilm])
   return (
-    <div className='bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] pt-20'>
+    <div className='pt-20'>
       <div className='h-[5000px] container  '>
         <div className='flex justify-center gap-8 mt-20 '>
           <div onClick={handleMovieShowing}>

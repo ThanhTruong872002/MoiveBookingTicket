@@ -13,9 +13,7 @@ module.exports = {
         login:
           "linear-gradient( to bottom, rgba(20, 50, 93, 0.9), rgba(8, 22, 48, 0.9));",
       },
-      // colors: {
-      //   'login-form' :
-      // }
+      
     },
   },
   plugins: [],
