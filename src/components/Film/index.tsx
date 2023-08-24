@@ -5,7 +5,7 @@ import { FilmItem } from '../../@types/Film'
 import LazyLoad from 'react-lazyload'
 import Button from '../Common/Button'
 import './Film.css'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export default function Film() {
   const { filmData, setFilmData } = useContext(LoginContext)
@@ -89,9 +89,9 @@ export default function Film() {
                     {film.tenPhim}
                   </h2>
                   <div className='absolute -translate-y-4 ml-[-100%] btn-booking'>
-                    <NavLink to={`/detail/${film.maPhim}`}>
+                    <Link to={`/detail/${film.maPhim}`}>
                       <Button small>MUA VÉ</Button>
-                    </NavLink>
+                    </Link>
                   </div>
                 </div>
               </div>
