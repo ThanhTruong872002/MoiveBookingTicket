@@ -79,7 +79,7 @@ export default function ShowTheaters() {
                       <p className='text-[#9b9b9b] font-[400] text-[12px] mt-4'>113 phút - TIX 8.5 - IMDb 0</p>
                     </div>
                   </div>
-                  <div onClick={() => handleClick(index)} className='w-8 h-8 cursor-pointer mr-20'>
+                  <div onClick={() => handleClick(index)} className='w-8 h-8 cursor-pointer mr-20 transition-rotate duration-300'>
                     <CheveronDown />
                   </div>
                 </div>
