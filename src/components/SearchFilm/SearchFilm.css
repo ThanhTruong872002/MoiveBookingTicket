@@ -1,0 +1,7 @@
+.result {
+    width: 960px;
+    max-height: 375px;
+    margin-top: 10px;
+    background-color: white;
+    overflow-y: scroll;
+}

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import './showTime.css'
 import Expandable from '../Expandable/expandable'
 import { Link } from 'react-router-dom'
+import { CalenderIcon } from '../Common/Icons'
+import { format } from 'date-fns'
 
 interface Cinema {
   lstCumRap: Array<CinemaBranch>
@@ -70,7 +72,7 @@ const ShowTime = () => {
 
   return (
     <div className='container'>
-      <div className='showTime h-[700px]  my-[200px]'>
+      <div className='showTime h-[600px]  my-[200px]'>
         <div className=' flex h-full bg-white border-[1px] border-[#ccc] border-solid overflow-y-hidden py-10'>
           <div className='flex flex-col w-[12%] border-r-gray-500 border-r-[1px] border-solid'>
             {cumRap.map((tab, index) => (
@@ -84,7 +86,7 @@ const ShowTime = () => {
                   setActiveTab2(0)
                 }}
               >
-                <img src={tab.logo} alt='' width={'50px'} height={'50px'} />
+                <img src={tab.logo} alt='' width={'50px'} height={'50px'} className='mx-auto' />
               </div>
             ))}
           </div>
@@ -117,7 +119,7 @@ const ShowTime = () => {
                   className='cursor-pointer flex flex-col gap-4 py-4 border-b-2 border-gray-500 border-solid transition-height duration-300'
                   key={index}
                 >
-                  <Expandable baseHeight='70px' expandedHeight='200px'>
+                  <Expandable baseHeight='70px' expandedHeight='230px'>
                     <div className='flex gap-[15px]'>
                       <div className='w-[60px] h-[70px]'>
                         <img src={phim.hinhAnh} alt='' className='w-full h-full rounded-md' />
@@ -131,23 +133,21 @@ const ShowTime = () => {
                       </div>
                     </div>
                     <div className='py-4'>
-                      <h3 className='pb-2'>2D Digital</h3>
+                      <h3 className='pb-2 mb-2'>2D Digital</h3>
                       <div className='flex flex-wrap gap-3'>
                         {phim.lstLichChieuTheoPhim?.slice(0, 8).map((lichChieu, index) => {
                           return (
                             <Link
-                              className='p-3 rounded-md border-[1px] border-red-600 border-solid'
+                              style={{ textDecoration: 'none' }}
                               key={index}
                               to={`/checkout/${lichChieu.maLichChieu}/${phim.maPhim}`}
                             >
-                              <div className='text-md'>
-                                <span className='hightlight'>
-                                  {new Date(lichChieu.ngayChieuGioChieu).getHours()}:
-                                  {new Date(lichChieu.ngayChieuGioChieu).getMinutes()}
-                                </span>{' '}
-                                ~ {new Date(lichChieu.ngayChieuGioChieu).getHours() + 2}:
-                                {new Date(lichChieu.ngayChieuGioChieu).getMinutes()}
-                              </div>
+                              <button className=' flex items-center gap-4 rounded-md  p-3 mt-6 border-[1px] border-solid border-[#e4e4e4] text-[1.4rem] bg-gray-100'>
+                                <CalenderIcon />
+                                <h2 className='text-[#108f3e] font-[600]'>
+                                  {`${format(new Date(lichChieu.ngayChieuGioChieu), 'HH:mm:ss')}`}
+                                </h2>
+                              </button>
                             </Link>
                           )
                         })}

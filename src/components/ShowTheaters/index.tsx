@@ -2,29 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Phim, data } from '../../@types/DetailsFilm'
-import { CalenderIcon, CheveronDown } from '../Common/Icons'
+import { CalenderIcon } from '../Common/Icons'
 import { NavLink } from 'react-router-dom'
-
-
+import Expandable from '../Expandable/expandable'
+import { format } from 'date-fns'
 
 export default function ShowTheaters() {
   const { id } = useParams()
 
   const [detailsFilmData, setDetailsFilmData] = useState<Phim>(data)
 
-  const [checked, setChecked] = useState(false)
-
-
-  const handleClick = (index: number) => {
-    setChecked(!checked)
-  }
-
-  // const handleClickCinema = (cinemaID :any) => {
-  //     setCinemaChecked(prev => ({
-  //       ...prev,
-  //       [cinemaID] : !prev[cinemaID]
-  //     }))
-  // }
+  const [activeTab, setActiveTab] = useState(0)
 
   const getDetailsFilm = async () => {
     const res = await axios.get(
@@ -38,92 +26,72 @@ export default function ShowTheaters() {
     getDetailsFilm()
   }, [])
 
-  const [activeTab, setActiveTab] = useState(0)
-
-  console.log(detailsFilmData.heThongRapChieu[activeTab])
-
   return (
     <div>
       <div className='w-[100%] h-[800px] bg-white mt-20 flex rounded-md '>
-        <div className='w-[30%] overflow-scroll'>
+        <div className='w-[30%] border-r-[1px] border-solid border-[#ccc] '>
           {detailsFilmData.heThongRapChieu.map((result, index) => (
             <div
               key={index}
               onClick={() => {
                 setActiveTab(index)
               }}
-              className={` p-4 transition-all  ${index === activeTab ? 'border-e-4 border-red-600 border-solid border-b-[#ccc]' : ''
-                } cursor-pointer w-[100%] p-5 text-[1.6rem] font-[600] flex items-center gap-8 border-b-[1px] border-solid border-[#ccc]`}
+              className={` p-4 transition-all  ${
+                index === activeTab ? 'border-e-4 border-red-600 border-solid border-b-[#ccc]' : ''
+              } cursor-pointer w-[100%] p-5 text-[1.6rem] font-[600] flex items-center gap-8`}
             >
               <img className='w-[50px] h-[50px] ' src={result.logo} alt='' />
               <h2>{result.maHeThongRap}</h2>
             </div>
           ))}
         </div>
-
-        <div className='w-[70%] border-l-[1px] border-solid border-[#ccc] overflow-scroll'>
+        <div className='w-[70%] px-12'>
           {detailsFilmData.heThongRapChieu[activeTab]?.cumRapChieu.map((result) =>
             result.lichChieuPhim.map((res2, index) => (
-              <div className='flex flex-col' key={index}>
-                <div className=' flex gap-2 items-center justify-between'>
-                  <div className='flex items-center'>
-                    <div className='px-5 py-8'>
-                      <img
-                        className='w-[60px] h-[60px] object-cover rounded-[5%] '
-                        src='https://s3img.vcdn.vn/123phim/2018/10/cinestar-hai-ba-trung-15383833704033.jpg'
-                        alt=''
-                      />
-                    </div>
-                    <div>
-                      <h2 className='text-[1.6rem] font-[600] '>{result.maCumRap}</h2>
-                      <p className='text-[#9b9b9b] font-[400] text-[12px] mt-4'>113 phút - TIX 8.5 - IMDb 0</p>
+              <div className=' pb-4 border-b-[1px]  border-[#ccc] border-solid'>
+                <Expandable baseHeight='90px' expandedHeight='200px'>
+                  <div className='w-[90%] '>
+                    <div className='flex flex-col' key={index}>
+                      <div className=' flex gap-2 items-center justify-between'>
+                        <div className='flex items-center'>
+                          <div className='pr-5 py-8'>
+                            <img
+                              className='w-[60px] h-[60px] object-cover rounded-[5%] '
+                              src='https://s3img.vcdn.vn/123phim/2018/10/cinestar-hai-ba-trung-15383833704033.jpg'
+                              alt=''
+                            />
+                          </div>
+                          <div>
+                            <h2 className='text-[1.6rem] font-[600] '>{result.maCumRap}</h2>
+                            <p className='text-[#9b9b9b] font-[400] text-[12px] mt-4'>113 phút - TIX 8.5 - IMDb 0</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h2 className='font-[600] text-[1.8rem]'>2D Digital</h2>
+                        <div>
+                          <NavLink style={{ textDecoration: 'none' }} to='#'>
+                            <button className=' flex items-center gap-4 rounded-md  p-3 mt-6 border-[1px] border-solid border-[#e4e4e4] text-[1.4rem] bg-gray-100'>
+                              <CalenderIcon />
+                              <h2 className='text-[#108f3e] font-[600]'>
+                                {`${format(new Date(res2.ngayChieuGioChieu), 'dd/MM/yyyy')} - ${format(
+                                  new Date(res2.ngayChieuGioChieu),
+                                  'HH:mm:ss'
+                                )}`}
+                              </h2>
+                            </button>
+                          </NavLink>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div onClick={() => handleClick(index)} className='w-8 h-8 cursor-pointer mr-20 transition-rotate duration-300'>
-                    <CheveronDown />
-                  </div>
-                </div>
-                {checked && (
-                  <div>
-                    <h2 className='font-[600] text-[1.8rem] pl-12'>2D Digital</h2>
-                    <div>
-                      <NavLink to='#'>
-                        <button className='flex items-center gap-4 rounded-md ml-12 p-3 mt-6 border-[1px] border-solid border-[#e4e4e4] text-[1.4rem] bg-gray-100'>
-                          <CalenderIcon />
-                          <h2 className='text-[#108f3e] font-[600]'>{res2.ngayChieuGioChieu}</h2>
-                        </button>
-                      </NavLink>
-                    </div>
-                  </div>
-                )}
+                </Expandable>
               </div>
             ))
-          )
-          }
+          )}
         </div>
       </div>
     </div>
   )
-}
-
-{
-  /* <div className='container h-[480px] flex border-2 borrder-white border-solid overflow-y-hidden'>
-      <div className='flex flex-col border-r'>
-        {cumRap.map((tab, index) => (
-          <div
-            key={index}
-            className={`p-4 transition-all ${index === activeTab ? 'border-e-4 border-red-600 border-solid' : ''}`}
-            onClick={() => {
-              setActiveTab(index)
-            }}
-          >
-            <img src={`${tab.logo}`} alt='' width={'50px'} height={'50px'} />
-          </div>
-        ))}
-      </div>
-      <div>
-          {cumRap[activeTab].content}
-           
-      </div>
-    </div> */
 }

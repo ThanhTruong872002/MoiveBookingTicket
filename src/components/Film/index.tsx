@@ -5,7 +5,7 @@ import { FilmItem } from '../../@types/Film'
 import LazyLoad from 'react-lazyload'
 import Button from '../Common/Button'
 import './Film.css'
-import { Link, NavLink } from 'react-router-dom'
+import {  NavLink } from 'react-router-dom'
 
 export default function Film() {
   const { filmData, setFilmData } = useContext(LoginContext)
@@ -81,17 +81,17 @@ export default function Film() {
               </LazyLoad>
 
               <div className='button-datve relative overflow-hidden'>
-                <div className='flex gap-3 items-center mt-5'>
-                  <div className='bg-[#fb4226] text-center mr-[8px] py-[5px] text-[#fff] w-auto p-2 rounded-[4px] mt-[10px] font-[600]'>
-                    {film.maNhom}
-                  </div>
-                  <h2 className='text-[1.6rem] font-[600] text-ellipsis w-[150px] h-auto overflow-hidden whitespace-nowrap text-white'>
+                <div className='flex gap-3 items-center mt-6 h-[62px]'>
+                  {/* <div className='bg-[#fb4226] text-center mr-[8px] py-[5px] text-[#fff] w-auto p-2 rounded-[4px] font-[600]'>
+                    C18
+                  </div> */}
+                  <h2 className='text-[1.6rem] font-[600] w-auto h-auto text-white  uppercase mx-auto leading-10 max-h-[50px] text-ellipsis overflow-hidden' >
                     {film.tenPhim}
                   </h2>
                   <div className='absolute -translate-y-4 ml-[-100%] btn-booking'>
-                    <Link to={`/detail/${film.maPhim}`}>
+                    <NavLink style={{textDecoration:"none"}} to={`/detail/${film.maPhim}`}>
                       <Button small>MUA VÉ</Button>
-                    </Link>
+                    </NavLink>
                   </div>
                 </div>
               </div>

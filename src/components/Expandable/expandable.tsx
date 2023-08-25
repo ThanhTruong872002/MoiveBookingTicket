@@ -1,5 +1,6 @@
 // ExpandableDiv.tsx
 import React, { useState } from 'react'
+import { CheveronDown } from '../Common/Icons'
 
 interface PropType {
   baseHeight: string
@@ -14,19 +15,19 @@ const Expandable: React.FC<PropType> = ({ baseHeight, expandedHeight, children }
     setExpanded((prevExpanded) => !prevExpanded)
   }
 
+  const changeheight = {
+    height: !expanded ? expandedHeight : baseHeight
+  }
+
   return (
-    <div
-      className={`position-relative overflow-hidden transition-al ease-in duration-300 ${
-        expanded ? `h-[${expandedHeight}] py-2` : `h-[${baseHeight}]`
-      }`}
-    >
+    <div style={changeheight} className={`position-relative overflow-hidden transition-al ease-in duration-300 w-full `}>
       <button
         onClick={toggleExpand}
-        className={`mb-2 px-3 py-1 bg-blue-500 text-white rounded-full position-absolute right-0 top-[30px] transition-rotate duration-300 ${
+        className={`mb-2 px-3 py-1 rounded-full position-absolute right-0 top-[25px] transition-rotate duration-300 ${
           expanded ? 'rotate-180' : ''
         }`}
       >
-        v
+        <CheveronDown />
       </button>
       {children}
     </div>
