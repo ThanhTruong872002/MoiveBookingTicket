@@ -72,14 +72,14 @@ const ShowTime = () => {
 
   return (
     <div className='container'>
-      <div className='showTime h-[600px]  my-[200px]'>
+      <div className='showTime h-[650px]  my-[200px]'>
         <div className=' flex h-full bg-white border-[1px] border-[#ccc] border-solid overflow-y-hidden py-10'>
           <div className='flex flex-col w-[12%] border-r-gray-500 border-r-[1px] border-solid'>
             {cumRap.map((tab, index) => (
               <div
                 key={index}
-                className={`cursor-pointer py-4 px-5 ${
-                  index === activeTab ? 'border-e-[2px] border-red-600 border-solid' : ''
+                className={`cursor-pointer h-[100px] py-10 px-5 ${
+                  index === activeTab ? 'border-e-[3px] border-red-600 border-solid' : ''
                 }`}
                 onClick={() => {
                   setActiveTab(index)
@@ -93,13 +93,13 @@ const ShowTime = () => {
           <div className='flex w-[88%]'>
             <div className='showTime h-[auto] w-[35%] flex flex-col overflow-y-scroll'>
               {cumRap[activeTab].lstCumRap.map((tab, index) => (
-                <div key={index} className='cursor-pointer h-[79px]'>
+                <div key={index} className='cursor-pointer h-[100px]'>
                   <div
                     key={index}
-                    className={`p-6 flex items-center ${
+                    className={`p-10 flex items-center ${
                       index === activeTab2
-                        ? 'border-e-[2px] border-red-600 border-solid'
-                        : 'border-e-[2px] border-white border-solid'
+                        ? 'border-e-[3px] border-red-600 border-solid'
+                        : 'border-e-[3px] border-white border-solid'
                     }`}
                     onClick={() => setActiveTab2(index)}
                   >
