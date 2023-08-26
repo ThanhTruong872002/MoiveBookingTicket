@@ -4,6 +4,7 @@ import SignIn from '../pages/Signin'
 import { useContext } from 'react'
 import { LoginContext } from '../App'
 import Details from '../pages/Details'
+import Checkout from '../pages/Checkout'
 // interface RouteObject {
 //   path?: string;
 //   index?: boolean;
@@ -43,7 +44,11 @@ export default function useRouterElement() {
     },
     {
       path: '/detail/:id',
-      element: <Details/>
+      element: <Details />
+    },
+    {
+      path: '/checkout:id',
+      element: <Checkout/>
     }
   ])
   return routerElemnts

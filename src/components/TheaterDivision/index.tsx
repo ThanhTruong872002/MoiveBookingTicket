@@ -62,7 +62,6 @@ const ShowTime = () => {
       url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP03'
     })
       .then(function (response) {
-        console.log(response.data)
         setCumRap(response.data)
       })
       .catch(function (error) {

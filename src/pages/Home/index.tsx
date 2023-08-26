@@ -9,18 +9,16 @@ import ShowTime from '../../components/TheaterDivision'
 
 export default function Home() {
   return (
-    <div>
-      <div>
-        <Header />
-        <Hero />
-        <div className='bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")]'>
-          {/* <TicketBookingFast /> */}
-          <SearchFilm />
-          <Film />
-          <ShowTime />
-          <Footer />
-        </div>
+    <>
+      <Header />
+      <Hero />
+      <div className='bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")]'>
+        {/* <TicketBookingFast /> */}
+        <SearchFilm />
+        <Film />
+        <ShowTime />
+        <Footer />
       </div>
-    </div>
+    </>
   )
 }

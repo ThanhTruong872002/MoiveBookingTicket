@@ -17,7 +17,7 @@ export default function SimpleSlider() {
   }
 
   return (
-    <div>
+    <div className='pt-24'>
       <Slider {...settings}>
         <div>
           <img

@@ -50,7 +50,7 @@ export default function DetailFilm() {
   })
 
   return (
-    <div className='bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] pb-40'>
+    <div className='bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] py-40'>
       <div className='container'>
         <div className='flex gap-4 items-center text-[2.4rem] text-white pt-12'>
           <h2>Trang chủ - </h2>

@@ -23,19 +23,6 @@ export default function Input() {
     setCheckLogin(!checkLogin)
   }
 
-  //Local Storage
-
-  // useEffect(() => {
-  //   const storedUsername = localStorage.getItem("username");
-  //   const storedAccessToken = localStorage.getItem("acesstoken");
-
-  //   console.log(storedAccessToken);
-
-  //   if (storedUsername && storedAccessToken) {
-  //     setAuthenticated(true);
-  //   }
-  // }, []);
-
   // Handle Login
 
   const handleSummit = async (e: any) => {

@@ -12,8 +12,6 @@ export default function Film() {
 
   const [statusFilm, setStatusFilm] = useState(true)
 
-  console.log('filmData', filmData)
-
   const handleMovieShowing = () => {
     setStatusFilm(true)
   }

@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { LoginContext } from '../../App'
 import LogOut from '../LogOut'
 import Button from '../Common/Button'
+import "./Head.css"
 
 export default function Header() {
   const navigate = useNavigate()
-
-  const [showPopupLogOut, setShowPopupLogOut] = useState(false)
 
   const { authenticated, profile } = useContext(LoginContext)!
 
@@ -16,16 +15,8 @@ export default function Header() {
     navigate('/SignIn')
   }
 
-  const handleOnMouseEnter = () => {
-    setShowPopupLogOut(true)
-  }
-
-  const handleMouseLeave = () => {
-    setShowPopupLogOut(false)
-  }
-
   return (
-    <div className='bg-[#031327] h-[160px] pt-10 relative'>
+    <div className='bg-[#031327] h-[100px] pt-10 absolute z-10 w-full'>
       <div className='container'>
         <div className='flex justify-between items-center'>
           <div>
@@ -43,38 +34,28 @@ export default function Header() {
           </div>
           <div>
             <div className='flex items-center gap-3'>
-              {
-                authenticated && (
-                  <img
-                    className='w-[30px] h-[30px] rounded-[50%] '
-                    src='https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-1/364743708_1725906504494525_1533049139051175614_n.jpg?stp=cp0_dst-jpg_p60x60&_nc_cat=101&ccb=1-7&_nc_sid=7206a8&_nc_ohc=dTDhbyvNbbYAX-Z5Okk&_nc_ht=scontent.fdad3-4.fna&oh=00_AfBzGGr_Cwfmlmd5MSxjddeu7sUBAuX4OH5TZ7-7T_wgLg&oe=64E38399'
-                  />
-                )
-                
-              }
+              {authenticated && (
+                <img
+                  className='w-[30px] h-[30px] rounded-[50%] '
+                  src='https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-1/364743708_1725906504494525_1533049139051175614_n.jpg?stp=cp0_dst-jpg_p60x60&_nc_cat=101&ccb=1-7&_nc_sid=7206a8&_nc_ohc=dTDhbyvNbbYAX-Z5Okk&_nc_ht=scontent.fdad3-4.fna&oh=00_AfBzGGr_Cwfmlmd5MSxjddeu7sUBAuX4OH5TZ7-7T_wgLg&oe=64E38399'
+                />
+              )}
 
               <h2 className='cursor-pointer hover:opacity-[0.9] relative'>
                 {authenticated ? (
                   <>
                     <div>
-                      <div className='text-[#fff] z-[100]' onMouseMove={handleOnMouseEnter}>
-                        {profile?.hoTen}
+                      <div className='profile text-[#fff] z-[100]'>{profile?.hoTen}</div>
+
+                      <div className=' absolute z-[100] bg-white rounded-[5px] mt-2 right-[-14%] shadow-[0px_7px_20px_3px_rgba(0,0,0,0.75)]'>
+                        <LogOut />
                       </div>
-                      {showPopupLogOut && (
-                        <div
-                          onMouseLeave={handleMouseLeave}
-                          className='absolute z-[100] bg-white rounded-[5px] mt-2 right-[-14%] shadow-[0px_7px_20px_3px_rgba(0,0,0,0.75)]'
-                        >
-                          <LogOut />
-                        </div>
-                      )}
                     </div>
                   </>
                 ) : (
                   <div onClick={handleClick} className='mb-[20px] mr-5'>
                     <Button btnLogin>Đăng Nhập</Button>
                   </div>
-
                 )}
               </h2>
               <div className='w-[1px] h-[30px] border-[1px] border-solid text-[#ccc]'></div>
