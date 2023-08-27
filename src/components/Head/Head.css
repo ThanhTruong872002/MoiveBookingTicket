@@ -1,4 +1,9 @@
-
+.logout {
+    transition: all ease .7s;
+    opacity: 0;
+    display: none;
+}
 .profile:hover .logout {
+    opacity: 1;
     display: block;
 }

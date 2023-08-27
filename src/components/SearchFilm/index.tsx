@@ -45,7 +45,7 @@ export default function SearchFilm() {
           placeholder='Tìm kiếm phim'
           className=' w-[960px] h-[70px] p-10 border-solid border-[1px] border-[#4eea4b] placeholder:text-white rounded-[4px] bg-current '
         />
-        <div className='absolute top-7 right-[20%] z-50 '>
+        <div className='absolute top-7 right-[20%] z-1'>
           {' '}
           <SearchWithVoice setSearchValue={setSearchValue} />
         </div>
