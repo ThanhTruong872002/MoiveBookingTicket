@@ -1,0 +1,23 @@
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 21px;
+}
+
+.seats {
+    color: #113f8d;
+}
+
+
+.gheVip {
+    color: #f5930a;
+}
+
+.gheDaDat {
+    color: gray;
+    cursor: no-drop;
+}
+
+.gheDangChon {
+    color: #0af539;
+}

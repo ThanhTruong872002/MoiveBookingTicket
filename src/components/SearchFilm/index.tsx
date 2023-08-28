@@ -10,7 +10,6 @@ import SearchWithVoice from '../SearchWithVoice'
 export default function SearchFilm() {
   const { filmData, setFilmData } = useContext(LoginContext)
 
-
   const [searchValue, setSearchValue] = useState('')
 
   const [filmResult, setFilmResult] = useState<FilmItem[]>([])
@@ -29,7 +28,6 @@ export default function SearchFilm() {
 
   console.log(searchValue)
 
-
   return (
     <div className='p-28 pb-0'>
       <div className='flex justify-center mb-8'>
@@ -43,9 +41,9 @@ export default function SearchFilm() {
           type='text'
           name=''
           placeholder='Tìm kiếm phim'
-          className=' w-[960px] h-[70px] p-10 border-solid border-[1px] border-[#4eea4b] placeholder:text-white rounded-[4px] bg-current '
+          className=' w-[960px] h-[70px] p-10 border-solid border-[1px] text-[#4eea4b] border-[#4eea4b] placeholder:text-[#4eea4b] rounded-[4px] bg-transparent'
         />
-        <div className='absolute top-7 right-[20%] z-50 '>
+        <div className='absolute top-7 right-[25%] z-50 '>
           {' '}
           <SearchWithVoice setSearchValue={setSearchValue} />
         </div>

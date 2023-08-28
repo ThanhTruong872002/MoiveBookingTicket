@@ -17,19 +17,26 @@ export default function LogOut() {
     <div>
       <div className='flex flex-col  items-center  w-[170px] h-[88px]'>
         <Link
+          style={{ textDecoration: 'none' }}
           to='#'
           className='h-[50%] flex items-center text-[1.5rem] hover:bg-[#fb4226] py-2 px-2 hover:text-[white] hover:w-[100%]'
         >
           Thông tin tài khoản{' '}
         </Link>
+
         <div
           className='mt-2 h-[50%] flex items-center gap-4 hover:bg-[#fb4226]  px-4 hover:text-[white] hover:w-[100%]'
           onClick={handleLogout}
         >
-          <Link to='#' className='text-[1.5rem] '>
+          <Link
+            style={{ textDecoration: 'none' }}
+            to='#'
+            className='text-[1.5rem] 
+          '
+          >
             Đăng xuất
           </Link>
-         <LogOutIcon/>
+          <LogOutIcon />
         </div>
       </div>
     </div>

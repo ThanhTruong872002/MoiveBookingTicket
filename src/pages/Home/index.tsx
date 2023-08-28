@@ -6,6 +6,7 @@ import SearchFilm from '../../components/SearchFilm'
 import Film from '../../components/Film'
 import Footer from '../../components/Footer'
 import ShowTime from '../../components/TheaterDivision'
+import DetailsBooked from '../../components/Layouts/components/DetailsBooked'
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <Film />
         <ShowTime />
         <Footer />
+        <DetailsBooked/>
       </div>
     </>
   )

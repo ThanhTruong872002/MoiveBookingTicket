@@ -139,7 +139,8 @@ const ShowTime = () => {
                             <Link
                               style={{ textDecoration: 'none' }}
                               key={index}
-                              to={`/checkout/${lichChieu.maLichChieu}/${phim.maPhim}`}
+                              to={`/checkout/${lichChieu.maLichChieu}`}
+                              // /${phim.maPhim}
                             >
                               <button className=' flex items-center gap-4 rounded-md  p-3 mt-6 border-[1px] border-solid border-[#e4e4e4] text-[1.4rem] bg-gray-100'>
                                 <CalenderIcon />

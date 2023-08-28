@@ -36,7 +36,6 @@
   align-items: center;
   border-radius: 4px;
   font-weight: 600;
-  
 }
 
 .btnShowingFilm {
@@ -66,6 +65,28 @@
   width: 200px;
   height: 60px;
   border-radius: 35px;
-  background-color: #54AB35;
+  background-color: #54ab35;
   pointer-events: none;
+}
+
+.booked {
+  max-width: 69px;
+  height: 35px;
+  background-color: #fb4226;
+  color: #fff;
+  padding: 8px 0;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1.3rem;
+}
+
+.bookedEnd {
+  max-width: 100px;
+  height: 50px;
+  background-color: #fb4226;
+  color: #fff;
+  padding: 8px 0;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1.3rem;
 }

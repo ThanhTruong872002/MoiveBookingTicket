@@ -5,17 +5,7 @@ import { useContext } from 'react'
 import { LoginContext } from '../App'
 import Details from '../pages/Details'
 import Checkout from '../pages/Checkout'
-// interface RouteObject {
-//   path?: string;
-//   index?: boolean;
-//   children?: React.ReactNode;
-//   caseSensitive?: boolean;
-//   id?: string;
-//   element?: React.ReactNode | null;
-//   Component?: React.ComponentType | null;
-//   errorElement?: React.ReactNode | null;
-//   ErrorBoundary?: React.ComponentType | null;
-// }
+
 function ProtectedRouter() {
   const { authenticated } = useContext(LoginContext)
 
@@ -47,7 +37,7 @@ export default function useRouterElement() {
       element: <Details />
     },
     {
-      path: '/checkout:id',
+      path: '/checkout/:id',
       element: <Checkout/>
     }
   ])
