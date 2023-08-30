@@ -1,12 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
-// import { createBrowserHistory } from 'history'
+import { createBrowserHistory } from 'history'
 
+const history = createBrowserHistory()
 
-// const history = createBrowserHistory()
-
-const CountDown = (props:any) => {
+const CountDown = (props: any) => {
   const { Minute = 0, Seconds = 0 } = props
   const [minutes, setMinutes] = useState(Minute)
   const [seconds, setSeconds] = useState(Seconds)
@@ -29,11 +28,11 @@ const CountDown = (props:any) => {
             denyButtonText: 'Trở về trang chủ'
           }).then((result) => {
             if (result.isConfirmed) {
-            //   window.location.reload(false)
+              window.location.reload()  
             } else if (result.isDenied) {
-            //   history.push('/')
+              history.push('/')
             }
-          })
+          })  
         }
       }
     }, 1000)

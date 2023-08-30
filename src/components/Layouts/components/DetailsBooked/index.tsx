@@ -1,10 +1,36 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { CoinIcon, HouseIcon, MovieIcon, ProfileIcon, TicketIcon } from '../../../Common/Icons'
 import Button from '../../../Common/Button'
+import { ContentShowTime } from '../../../../@types/ShowTimes'
+import { LoginContext } from '../../../../App'
+import { useNavigate, useParams } from 'react-router-dom'
 
-export default function DetailsBooked() {
+import { createBrowserHistory } from 'history'
+
+const history = createBrowserHistory()
+
+interface IDetailsBooks {
+  showTimesData: ContentShowTime
+  totalMoney: number
+}
+
+export default function DetailsBooked({ showTimesData, totalMoney }: IDetailsBooks) {
+  const { id } = useParams()
+
+  const { profile } = useContext(LoginContext)
+
+  const navigate = useNavigate()
+
+  const handleBackHome = () => {
+    navigate('/')
+  }
+
+  const handleContinuteBuy = () => {
+    window.location.reload()
+  }
+
   return (
-    <div className='w-[600px] mx-auto h-[800px] bg-slate-200 '>
+    <div className='w-[600px] mx-auto h-[700px] bg-slate-200 border-black border-[4px] border-solid'>
       <div className='p-4 bg-[#fb4226] text-center '>
         <h2 className='font-[600] text-[1.8rem] text-white'>ĐẶT VÉ THÀNH CÔNG</h2>
       </div>
@@ -15,13 +41,13 @@ export default function DetailsBooked() {
           </div>
           <div>
             <h2>
-              <span className='font-bold mr-4'>Tài khoản:</span> thanhtruong02
+              <span className='font-bold mr-4'>Tài khoản:</span> {profile?.taiKhoan}
             </h2>
             <h2 className='my-3'>
-              <span className='font-bold mr-4'>Email:</span> truongtecu872002@gmail.com
+              <span className='font-bold mr-4'>Email:</span> {profile?.email}
             </h2>
             <h2>
-              <span className='font-bold mr-4'>Số điện thoại:</span> 0766558051
+              <span className='font-bold mr-4'>Số điện thoại:</span> {profile?.soDT}
             </h2>
           </div>
         </div>
@@ -30,7 +56,7 @@ export default function DetailsBooked() {
             <MovieIcon />
           </div>
           <h2>
-            <span className='font-bold mr-4'>Tên phim: </span> Kẻ ẩn danh
+            <span className='font-bold mr-4'>Tên phim: </span> {showTimesData.thongTinPhim.tenPhim}
           </h2>
         </div>
         <div className='flex gap-10 items-center mt-20'>
@@ -39,10 +65,11 @@ export default function DetailsBooked() {
           </div>
           <div>
             <h2>
-              <span className='font-bold mr-4'>Rạp: </span> BHD Đà Nẵng - Rạp 9
+              <span className='font-bold mr-4'>Rạp: </span> {showTimesData.thongTinPhim.tenRap}
             </h2>
             <h2 className='my-3'>
-              <span className='font-bold mr-4 '>Thời gian chiếu: </span> 28/8/2023 - 10:00
+              <span className='font-bold mr-4 '>Thời gian chiếu: </span> {showTimesData.thongTinPhim.ngayChieu} -{' '}
+              {showTimesData.thongTinPhim.ngayChieu}
             </h2>
           </div>
         </div>
@@ -64,15 +91,19 @@ export default function DetailsBooked() {
           </div>
           <div>
             <h2 className='font-bold  '>
-              Tổng tiền: <span className='text-[#44c020] text-[2rem] ml-4'>180.000 đ</span>
+              Tổng tiền: <span className='text-[#44c020] text-[2rem] ml-4'>{totalMoney.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
             </h2>
           </div>
         </div>
       </div>
 
       <div className='flex mt-10 gap-10 justify-center'>
-        <div><Button bookedEnd>Về trang chủ</Button></div>
-        <div><Button bookedEnd>Đặt vé mới </Button></div>
+        <div onClick={handleBackHome}>
+          <Button bookedEnd>Về trang chủ</Button>
+        </div>
+        <div onClick={handleContinuteBuy}>
+          <Button bookedEnd>Đặt vé mới </Button>
+        </div>
       </div>
     </div>
   )

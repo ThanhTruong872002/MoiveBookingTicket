@@ -3,7 +3,7 @@ import { WarningIcon } from '../../../Common/Icons'
 import Button from '../../../Common/Button'
 import { ContentShowTime, Ghe } from '../../../../@types/ShowTimes'
 import { LoginContext } from '../../../../App'
-import { useContext, useEffect, useState } from 'react'
+import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { access } from 'fs'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -12,16 +12,25 @@ import Swal from 'sweetalert2'
 interface IshowTimesData {
   showTimesData: ContentShowTime
   infoTicket: Ghe[]
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>
+  totalMoney: number
+  setTotalMoney: React.Dispatch<React.SetStateAction<number>>
+  seatsPositon: string[]
+  setSeatsPosition: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-export default function TicketSideBar({ showTimesData, infoTicket }: IshowTimesData) {
+export default function TicketSideBar({
+  showTimesData,
+  infoTicket,
+  setChecked,
+  setTotalMoney,
+  totalMoney,
+  setSeatsPosition,
+  seatsPositon
+}: IshowTimesData) {
   const { profile } = useContext(LoginContext)
 
   const { id } = useParams()
-
-  const [totalMoney, setTotalMoney] = useState(0)
-
-  const navigate = useNavigate()
 
   const handleTotalMoney = () => {
     let sum = 0
@@ -58,8 +67,18 @@ export default function TicketSideBar({ showTimesData, infoTicket }: IshowTimesD
       } else if (seatRow <= 10) {
         seatPosition = `J${seatNumber}`
       }
-      return <span>{seatPosition}, </span>
+
+      // setSeatsPosition((prev) => [...prev, seatPosition])
+      return (
+        <span>
+          {seatPosition} {''}{' '}
+        </span>
+      )
     })
+
+  useEffect(() => {
+    renderSeatPosition()
+  }, [seatsPositon])
 
   useEffect(() => {
     handleTotalMoney()
@@ -71,7 +90,7 @@ export default function TicketSideBar({ showTimesData, infoTicket }: IshowTimesD
       Swal.fire({
         icon: 'error',
         title: 'Vui lòng đặt ghế',
-        text: "Bạn phải chọn ghế trước khi đặt vé",
+        text: 'Bạn phải chọn ghế trước khi đặt vé',
         showConfirmButton: true,
         timer: 2000
       })
@@ -91,14 +110,13 @@ export default function TicketSideBar({ showTimesData, infoTicket }: IshowTimesD
           { headers }
         )
         if (res.status === 200) {
-          navigate('/')
+          setChecked(true)
         }
       } catch (error) {
         console.error(error)
       }
     }
-    }
-   
+  }
 
   return (
     <div className='ticket p-10 bg-white flex flex-col gap-6 w-[30%]'>
