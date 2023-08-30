@@ -110,7 +110,16 @@ export default function TicketSideBar({
           { headers }
         )
         if (res.status === 200) {
-          setChecked(true)
+           Swal.fire({
+        icon: 'success',
+        title: 'Bạn đã đặt ghế thành công ',
+        text: 'Vui lòng kiểm tra thông tin ',
+        showConfirmButton: true,
+        timer: 2000
+      })
+          setTimeout(() => {
+            setChecked(true)
+          },2000)
         }
       } catch (error) {
         console.error(error)
