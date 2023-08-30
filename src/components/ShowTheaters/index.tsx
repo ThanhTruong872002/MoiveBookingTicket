@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState, useContext } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Phim, data } from '../../@types/DetailsFilm'
 import { CalenderIcon } from '../Common/Icons'
 import { NavLink } from 'react-router-dom'
 import Expandable from '../Expandable/expandable'
 import { format } from 'date-fns'
+import { LoginContext } from '../../App'
 
 export default function ShowTheaters() {
+  const { codeRoom } = useContext(LoginContext)
+
+  console.log(codeRoom)
+
   const { id } = useParams()
 
   const [detailsFilmData, setDetailsFilmData] = useState<Phim>(data)
 
   const [activeTab, setActiveTab] = useState(0)
+
 
   const getDetailsFilm = async () => {
     const res = await axios.get(
@@ -49,7 +55,7 @@ export default function ShowTheaters() {
           {detailsFilmData.heThongRapChieu[activeTab]?.cumRapChieu.map((result) =>
             result.lichChieuPhim.map((res2, index) => (
               <div className=' pb-4 border-b-[1px]  border-[#ccc] border-solid'>
-                <Expandable baseHeight='90px' expandedHeight='200px'>
+                <Expandable baseHeight='90px' expandedHeight='220px'>
                   <div className='w-[90%] '>
                     <div className='flex flex-col' key={index}>
                       <div className=' flex gap-2 items-center justify-between'>
@@ -70,19 +76,27 @@ export default function ShowTheaters() {
 
                       <div>
                         <h2 className='font-[600] text-[1.8rem]'>2D Digital</h2>
-                        <div>
-                          <NavLink style={{ textDecoration: 'none' }} to='#'>
-                            <button className=' flex items-center gap-4 rounded-md  p-3 mt-6 border-[1px] border-solid border-[#e4e4e4] text-[1.4rem] bg-gray-100'>
-                              <CalenderIcon />
-                              <h2 className='text-[#108f3e] font-[600]'>
-                                {`${format(new Date(res2.ngayChieuGioChieu), 'dd/MM/yyyy')} - ${format(
-                                  new Date(res2.ngayChieuGioChieu),
-                                  'HH:mm:ss'
-                                )}`}
-                              </h2>
-                            </button>
-                          </NavLink>
-                        </div>
+                        {codeRoom[activeTab].lstCumRap[activeTab].danhSachPhim[activeTab].lstLichChieuTheoPhim.map(
+                          (lichchieu) => (
+                            <div>
+                              <Link
+                                key={index}
+                                style={{ textDecoration: 'none' }}
+                                to={`/checkout/${lichchieu.maLichChieu}`}
+                              >
+                                <button className=' flex items-center gap-4 rounded-md  p-3 mt-6 border-[1px] border-solid border-[#e4e4e4] text-[1.4rem] bg-gray-100'>
+                                  <CalenderIcon />
+                                  <h2 className='text-[#108f3e] font-[600]'>
+                                    {`${format(new Date(res2.ngayChieuGioChieu), 'dd/MM/yyyy')} - ${format(
+                                      new Date(res2.ngayChieuGioChieu),
+                                      'HH:mm:ss'
+                                    )}`}
+                                  </h2>
+                                </button>
+                              </Link>
+                            </div>
+                          )
+                        )}
                       </div>
                     </div>
                   </div>

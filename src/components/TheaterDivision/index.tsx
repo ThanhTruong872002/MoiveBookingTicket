@@ -1,52 +1,20 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import './showTime.css'
 import Expandable from '../Expandable/expandable'
 import { Link } from 'react-router-dom'
 import { CalenderIcon } from '../Common/Icons'
 import { format } from 'date-fns'
+import { Cinema } from '../../@types/Cinema'
+import { LoginContext, initialCinemas } from '../../App'
 
-interface Cinema {
-  lstCumRap: Array<CinemaBranch>
-  maHeThongRap: string
-  tenHeThongRap: string
-  logo: string
-  mahom: string
-}
-
-interface CinemaBranch {
-  danhSachPhim: Array<Movie>
-  maCumRap: string
-  tenCumRap: string
-  diaChi: string
-}
-
-interface Movie {
-  lstLichChieuTheoPhim: Array<any> // You might want to define a type for lstLichChieuTheoPhim
-  maPhim: number
-  tenPhim: string
-  hinhAnh: string
-}
 
 const ShowTime = () => {
-  const initialCinemas: Cinema[] = [
-    {
-      lstCumRap: [
-        {
-          danhSachPhim: [],
-          maCumRap: 'bhd-star-cineplex-3-2',
-          tenCumRap: 'BHD Star Cineplex - 3/2',
-          diaChi: 'L5-Vincom 3/2, 3C Đường 3/2, Q.10'
-        }
-      ],
-      maHeThongRap: 'BHDStar',
-      tenHeThongRap: 'BHD Star Cineplex',
-      logo: 'http://movie0706.cybersoft.edu.vn/hinhanh/bhd-star-cineplex.png',
-      mahom: 'GP01'
-    }
-  ]
 
+  const {  setCodeRoom } = useContext(LoginContext)
+
+ 
   const [cumRap, setCumRap] = useState<Cinema[]>(initialCinemas)
 
   const [activeTab, setActiveTab] = useState(0)
@@ -63,6 +31,7 @@ const ShowTime = () => {
     })
       .then(function (response) {
         setCumRap(response.data)
+        setCodeRoom(response.data)
       })
       .catch(function (error) {
         console.log(error)
@@ -140,7 +109,6 @@ const ShowTime = () => {
                               style={{ textDecoration: 'none' }}
                               key={index}
                               to={`/checkout/${lichChieu.maLichChieu}`}
-                              // /${phim.maPhim}
                             >
                               <button className=' flex items-center gap-4 rounded-md  p-3 mt-6 border-[1px] border-solid border-[#e4e4e4] text-[1.4rem] bg-gray-100'>
                                 <CalenderIcon />
