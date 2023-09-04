@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { LogOutIcon } from '../../components/Common/Icons'
-import { useNavigate } from 'react-router-dom'
+import { Form, useNavigate } from 'react-router-dom'
 import { clearAccessToken } from '../../utils/auth'
 import { LoginContext } from '../../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,6 +16,14 @@ import {
   faUnlock,
   faUser
 } from '@fortawesome/free-solid-svg-icons'
+import Input from '../../components/Common/Input'
+import Button from '../../components/Common/Button'
+
+interface IFormData {
+  password: string
+  newPassword: string
+  confirmNewPassword: string
+}
 
 export default function Profile() {
   const { setProfile, profile, setAuthenticated } = useContext(LoginContext)
@@ -23,6 +31,15 @@ export default function Profile() {
   const [changleBg, setChangeBg] = useState(false)
   const [changeBgTickets, setChangeBgTickets] = useState(false)
   const [personalInfo, setPersonalInfo] = useState(false)
+  const [formData, setFormData] = useState<IFormData>({
+    password: '',
+    newPassword: '',
+    confirmNewPassword: ''
+  })
+
+  console.log(formData);
+  
+
 
   const navigate = useNavigate()
 
@@ -43,6 +60,11 @@ export default function Profile() {
     setChangeBgTickets(!changeBgTickets)
     setChangeBg(false)
   }
+
+  // const updateState = (e: any) => {
+  //   const [name: value] = e.target
+  //   setFormData((prev) => ({...prev, name: e.target.value }) )
+  // }
 
   const changeBgSideBar = changleBg ? 'bg-[#f55960] text-white transition-all' : ''
   const changeBgTicketStyle = changeBgTickets ? 'bg-[#f55960] text-white transition-all' : ''
@@ -114,85 +136,124 @@ export default function Profile() {
             </div>
           </div>
 
-          {personalInfo && (
-            <div className='w-[880px] h-[620px] shadow-md p-10 transition-all'>
+          {/* {personalInfo && */}
+          {/* ( */}
+          <>
+            {/* <div className='w-[880px] h-[620px] shadow-md p-10 transition-all'>
+                <div>
+                  <div className='font-[600] text-[2rem] '>Thông tin tài khoản</div>
+                  <div className='border-t-[1px] border-solid border-[#ccc] mt-10'></div>
+                </div>
+  
+                <div className='mt-10 flex flex-col gap-16'>
+                  <div className='flex gap-10'>
+                    <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
+                      <FontAwesomeIcon icon={faIdBadge} style={{ color: 'white' }} size='2xl' />
+                    </div>
+                    <div className='w-[600px]'>
+                      <h2 className='font-[600]'>
+                        Tên khách hàng: <span className='text-[#fb4226] text-[1.8rem] ml-4'>{profile?.hoTen}</span>
+                      </h2>
+                      <p className='text-[1.3rem] text-[#878484] mt-2'>
+                        Họ và tên chủ tài khoản, cũng là tên của tài khoản hiển thị trên website. Bạn có thể thay đổi ở
+                        phần thay đổi thông tin cá nhân
+                      </p>
+                    </div>
+                  </div>
+                  <div className='flex gap-10'>
+                    <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
+                      <FontAwesomeIcon icon={faUser} style={{ color: 'white' }} size='2xl' />
+                    </div>
+                    <div className='w-[600px]'>
+                      <h2 className='font-[600]'>
+                        Tên tài khoản: <span className='text-[#fb4226] text-[1.8rem] ml-4'>{profile?.taiKhoan}</span>
+                      </h2>
+                      <p className='text-[1.3rem] text-[#878484] mt-2'>
+                        Là tên tài khoản (username) để đăng nhập tài khoản.
+                      </p>
+                    </div>
+                  </div>
+                  <div className='flex gap-10'>
+                    <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
+                      <FontAwesomeIcon icon={faLock} style={{ color: 'white' }} size='2xl' />
+                    </div>
+                    <div className=' flex justify-between items-center gap-32'>
+                      <div>
+                        <h2 className='font-[600]'>Mật khẩu</h2>
+                        <p className='text-[1.3rem] text-[#878484] mt-2'>
+                          Mật khẩu cần được kết hợp bởi nhiều chữ cái, số và ký tự đặc biệt để bảo mật tài khoản
+                        </p>
+                      </div>
+                      <Button changePassword>Thay đổi</Button>
+                    </div>
+                  </div>
+                  <div className='flex gap-10'>
+                    <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
+                      <FontAwesomeIcon icon={faMobileScreen} style={{ color: 'white' }} size='2xl' />
+                    </div>
+                    <div className='w-[600px]'>
+                      <h2 className='font-[600]'>
+                        Số điện thoại: <span className='text-[#fb4226] text-[1.8rem] ml-4'>{profile?.soDT}</span>
+                      </h2>
+                      <p className='text-[1.3rem] text-[#878484] mt-2'>
+                        Số điện thoại dùng để đăng kí tài khoản. Thông tin này có thể được dùng để xác minh bạn là chủ sở
+                        hữu tài khoản nhằm thiết lập lại mật khẩu
+                      </p>
+                    </div>
+                  </div>
+                  <div className='flex gap-10'>
+                    <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
+                      <FontAwesomeIcon icon={faEnvelope} style={{ color: 'white' }} size='2xl' />
+                    </div>
+                    <div className='w-[600px]'>
+                      <h2 className='font-[600]'>
+                        Email: <span className='text-[#fb4226] text-[1.8rem] ml-4'>{profile?.email}</span>
+                      </h2>
+                      <p className='text-[1.3rem] text-[#878484] mt-2'>
+                        Email có thể được sử dụng để thay đổi mật khẩu khi không có công cụ bảo mật nào khác được bật.
+                        Cũng như nhận các tin tức hoạt động của tài khoản.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div> */}
+
+            <div className='w-[880px] shadow-md p-10 transition-all '>
               <div>
-                <div className='font-[600] text-[2rem] '>Thông tin tài khoản</div>
+                <div className='font-[600] text-[2rem] '>Thay đổi mật khẩu </div>
                 <div className='border-t-[1px] border-solid border-[#ccc] mt-10'></div>
               </div>
+              <form>
+                <div className='mt-10'>
+                  <Input
+                    onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
+                    value={formData.password}
+                    typeInput={'password'}
+                    placeholder='Mật khẩu hiện tại'
+                  />
+                </div>
+                <div className='mt-10'>
+                  <Input
+                    onChange={(e) => setFormData((prev) => ({ ...prev, newPassword: e.target.value }))}
+                    value={formData.newPassword}
+                    typeInput={'password'}
+                    placeholder='Nhập mật khẩu mới'
+                  />
+                </div>
+                <div className='mt-10'>
+                  <Input
+                    onChange={(e) => setFormData((prev) => ({ ...prev, confirmNewPassword: e.target.value }))}
+                    value={formData.confirmNewPassword}
+                    typeInput={'password'}
+                    placeholder='Xác nhận mật khẩu mới'
+                  />1
+                </div>
+              </form>
 
-              <div className='mt-10 flex flex-col gap-16'>
-                <div className='flex gap-10'>
-                  <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
-                    <FontAwesomeIcon icon={faIdBadge} style={{ color: 'white' }} size='2xl' />
-                  </div>
-                  <div className='w-[600px]'>
-                    <h2 className='font-[600]'>
-                      Tên khách hàng: <span>Thanh Trường</span>
-                    </h2>
-                    <p className='text-[1.3rem] text-[#878484] mt-2'>
-                      Họ và tên chủ tài khoản, cũng là tên của tài khoản hiển thị trên website. Bạn có thể thay đổi ở
-                      phần thay đổi thông tin cá nhân
-                    </p>
-                  </div>
-                </div>
-                <div className='flex gap-10'>
-                  <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
-                    <FontAwesomeIcon icon={faUser} style={{ color: 'white' }} size='2xl' />
-                  </div>
-                  <div className='w-[600px]'>
-                    <h2 className='font-[600]'>
-                      Tên tài khoản: <span>Thanh Trường</span>
-                    </h2>
-                    <p className='text-[1.3rem] text-[#878484] mt-2'>
-                      Họ và tên chủ tài khoản, cũng là tên của tài khoản hiển thị trên website. Bạn có thể thay đổi ở
-                      phần thay đổi thông tin cá nhân
-                    </p>
-                  </div>
-                </div>
-                <div className='flex gap-10'>
-                  <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
-                    <FontAwesomeIcon icon={faLock} style={{ color: 'white' }} size='2xl' />
-                  </div>
-                  <div className='w-[600px]'>
-                    <h2 className='font-[600]'>Mật khẩu</h2>
-                    <p className='text-[1.3rem] text-[#878484] mt-2'>
-                      Họ và tên chủ tài khoản, cũng là tên của tài khoản hiển thị trên website. Bạn có thể thay đổi ở
-                      phần thay đổi thông tin cá nhân
-                    </p>
-                  </div>
-                </div>
-                <div className='flex gap-10'>
-                  <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
-                    <FontAwesomeIcon icon={faMobileScreen} style={{ color: 'white' }} size='2xl' />
-                  </div>
-                  <div className='w-[600px]'>
-                    <h2 className='font-[600]'>
-                      Số điện thoại: <span>Thanh Trường</span>
-                    </h2>
-                    <p className='text-[1.3rem] text-[#878484] mt-2'>
-                      Họ và tên chủ tài khoản, cũng là tên của tài khoản hiển thị trên website. Bạn có thể thay đổi ở
-                      phần thay đổi thông tin cá nhân
-                    </p>
-                  </div>
-                </div>
-                <div className='flex gap-10'>
-                  <div className='w-[60px] h-[60px] flex justify-center items-center rounded-[50%] bg-[#f55960]'>
-                    <FontAwesomeIcon icon={faEnvelope} style={{ color: 'white' }} size='2xl' />
-                  </div>
-                  <div className='w-[600px]'>
-                    <h2 className='font-[600]'>
-                      Email: <span>Thanh Trường</span>
-                    </h2>
-                    <p className='text-[1.3rem] text-[#878484] mt-2'>
-                      Họ và tên chủ tài khoản, cũng là tên của tài khoản hiển thị trên website. Bạn có thể thay đổi ở
-                      phần thay đổi thông tin cá nhân
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <Button changeConfirmPassword> Thay đổi</Button>
             </div>
-          )}
+          </>
+          {/* )} */}
         </div>
       </div>
     </div>

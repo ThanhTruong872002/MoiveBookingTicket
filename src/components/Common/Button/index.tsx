@@ -14,10 +14,14 @@ interface ButtonProps {
   btnSearchFilm?: boolean
   booked?: boolean
   bookedEnd?: boolean
+  changePassword?: boolean
+  changeConfirmPassword?: boolean
+  disabled?: boolean
 }
 
 const Button: FC<ButtonProps> = ({
   children,
+  disabled,
   primary,
   small,
   className,
@@ -25,7 +29,9 @@ const Button: FC<ButtonProps> = ({
   btnShowingFilm,
   btnSearchFilm,
   booked,
-  bookedEnd
+  bookedEnd,
+  changePassword,
+  changeConfirmPassword
 }) => {
   const classes = cx('primary', {
     [className]: className,
@@ -35,12 +41,15 @@ const Button: FC<ButtonProps> = ({
     btnShowingFilm,
     btnSearchFilm,
     booked,
-    bookedEnd
+    bookedEnd,
+    changePassword,
+    changeConfirmPassword
   })
+
 
   return (
     <div>
-      <button className={classes}>{children}</button>
+      <button disabled= {disabled} className={classes}>{children}</button>
     </div>
   )
 }

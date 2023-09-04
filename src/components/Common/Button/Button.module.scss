@@ -90,3 +90,27 @@
   border-radius: 4px;
   font-size: 1.3rem;
 }
+
+.changePassword {
+  border: 1px solid #f55960;
+  width: 100px;
+  margin-right: 25px;
+  border-radius: 99px;
+  background: #fff;
+  color: #f55960;
+  font-size: 1.6rem;
+  transition: all ease;
+}
+
+.changePassword:hover {
+  background-color:#f55960 ;
+  color: #fff;
+}
+
+.changeConfirmPassword {
+  width: 430px;
+  height: 36px;
+  color: rgba(0, 0, 0, 0.26);
+  background-color: rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
