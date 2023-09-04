@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { LoginContext } from '../App'
 import Details from '../pages/Details'
 import Checkout from '../pages/Checkout'
+import Profile from '../pages/Profile'
 
 function ProtectedRouter() {
   const { authenticated } = useContext(LoginContext)
@@ -39,6 +40,10 @@ export default function useRouterElement() {
     {
       path: '/checkout/:id',
       element: <Checkout/>
+    },
+    {
+      path: '/profile',
+      element: <Profile/>
     }
   ])
   return routerElemnts

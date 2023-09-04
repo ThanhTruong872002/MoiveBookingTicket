@@ -55,7 +55,7 @@ export default function Film() {
         </div>
 
         <div className='w-[1000px] grid grid-cols-4 gap-8 mt-[50px] mx-auto'>
-          {filmData.map((film: FilmItem) => (
+          {filmData.slice(0, 16).map((film: FilmItem) => (
             <div className='movie-item' key={film.maPhim}>
               <LazyLoad>
                 <img

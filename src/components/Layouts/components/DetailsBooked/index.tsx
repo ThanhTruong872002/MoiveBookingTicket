@@ -12,11 +12,10 @@ const history = createBrowserHistory()
 interface IDetailsBooks {
   showTimesData: ContentShowTime
   totalMoney: number
+  seatsPositon: string[]
 }
 
-export default function DetailsBooked({ showTimesData, totalMoney }: IDetailsBooks) {
-  const { id } = useParams()
-
+export default function DetailsBooked({ showTimesData, totalMoney, seatsPositon }: IDetailsBooks) {
   const { profile } = useContext(LoginContext)
 
   const navigate = useNavigate()
@@ -30,7 +29,7 @@ export default function DetailsBooked({ showTimesData, totalMoney }: IDetailsBoo
   }
 
   return (
-    <div className='w-[600px] mx-auto h-[700px] bg-slate-200 border-black border-[4px] border-solid'>
+    <div className='w-[600px] mx-auto h-[700px] bg-slate-200 border-black border-[2px] border-solid'>
       <div className='p-4 bg-[#fb4226] text-center '>
         <h2 className='font-[600] text-[1.8rem] text-white'>ĐẶT VÉ THÀNH CÔNG</h2>
       </div>
@@ -80,8 +79,9 @@ export default function DetailsBooked({ showTimesData, totalMoney }: IDetailsBoo
           <div>
             <h2 className='font-bold mr-4 '>Danh sách ghế được đặt:</h2>
             <div className='flex gap-3'>
-              <Button booked>41</Button>
-              <Button booked>42</Button>
+              {seatsPositon.map((position) => (
+                <Button booked>{position}</Button>
+              ))}
             </div>
           </div>
         </div>
@@ -91,7 +91,10 @@ export default function DetailsBooked({ showTimesData, totalMoney }: IDetailsBoo
           </div>
           <div>
             <h2 className='font-bold  '>
-              Tổng tiền: <span className='text-[#44c020] text-[2rem] ml-4'>{totalMoney.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+              Tổng tiền:{' '}
+              <span className='text-[#44c020] text-[2rem] ml-4'>
+                {totalMoney.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+              </span>
             </h2>
           </div>
         </div>

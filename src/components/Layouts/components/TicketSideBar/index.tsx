@@ -3,10 +3,9 @@ import { WarningIcon } from '../../../Common/Icons'
 import Button from '../../../Common/Button'
 import { ContentShowTime, Ghe } from '../../../../@types/ShowTimes'
 import { LoginContext } from '../../../../App'
-import React, { ReactNode, useContext, useEffect, useState } from 'react'
+import React, {  useContext, useEffect } from 'react'
 import axios from 'axios'
-import { access } from 'fs'
-import { useNavigate, useParams } from 'react-router-dom'
+import {  useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 interface IshowTimesData {
@@ -32,13 +31,9 @@ export default function TicketSideBar({
 
   const { id } = useParams()
 
-  const handleTotalMoney = () => {
-    let sum = 0
-    infoTicket.map((res) => (sum += res.giaVe))
-    setTotalMoney(sum)
-  }
+  const renderSeatPosition = () => {
+    const newSelectedSeatPositons: string[] = []
 
-  const renderSeatPosition = () =>
     infoTicket.map((selected) => {
       let seatPosition = ''
       let seatRow = Number(selected.stt) / 16
@@ -67,19 +62,20 @@ export default function TicketSideBar({
       } else if (seatRow <= 10) {
         seatPosition = `J${seatNumber}`
       }
-
-      // setSeatsPosition((prev) => [...prev, seatPosition])
-      return (
-        <span>
-          {seatPosition} {''}{' '}
-        </span>
-      )
+      newSelectedSeatPositons.push(seatPosition)
     })
+    setSeatsPosition(newSelectedSeatPositons)
+  }
 
   useEffect(() => {
     renderSeatPosition()
-  }, [seatsPositon])
+  }, [infoTicket, setSeatsPosition])
 
+  const handleTotalMoney = () => {
+    let sum = 0
+    infoTicket.map((res) => (sum += res.giaVe))
+    setTotalMoney(sum)
+  }
   useEffect(() => {
     handleTotalMoney()
   }, [infoTicket])
@@ -110,16 +106,16 @@ export default function TicketSideBar({
           { headers }
         )
         if (res.status === 200) {
-           Swal.fire({
-        icon: 'success',
-        title: 'Bạn đã đặt ghế thành công ',
-        text: 'Vui lòng kiểm tra thông tin ',
-        showConfirmButton: true,
-        timer: 2000
-      })
+          Swal.fire({
+            icon: 'success',
+            title: 'Bạn đã đặt ghế thành công ',
+            text: 'Vui lòng kiểm tra thông tin ',
+            showConfirmButton: true,
+            timer: 2000
+          })
           setTimeout(() => {
             setChecked(true)
-          },2000)
+          }, 2000)
         }
       } catch (error) {
         console.error(error)
@@ -145,7 +141,11 @@ export default function TicketSideBar({
       <div>
         <div className='flex items-center gap-8'>
           <h2 className='text-[#FF0000] text-[1.8rem]'>Vị Trí Ghế:</h2>
-          <p className='text-[2rem] text-[rgba(0,185,67)] font-bold'>{renderSeatPosition()}</p>
+          <p className='text-[2rem] text-[rgba(0,185,67)] font-bold'>
+            {seatsPositon.map((position, index) => (
+              <span key={index}>{position},</span>
+            ))}
+          </p>
         </div>
         <span className='block w-[80%] h-[1px] bg-[#ccc] mt-10'></span>
       </div>

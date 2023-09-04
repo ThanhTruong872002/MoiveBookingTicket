@@ -57,7 +57,7 @@ export default function Header() {
               {authenticated && (
                 <img
                   className='w-[30px] h-[30px] rounded-[50%] '
-                  src='https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-1/364743708_1725906504494525_1533049139051175614_n.jpg?stp=cp0_dst-jpg_p60x60&_nc_cat=101&ccb=1-7&_nc_sid=7206a8&_nc_ohc=dTDhbyvNbbYAX-Z5Okk&_nc_ht=scontent.fdad3-4.fna&oh=00_AfBzGGr_Cwfmlmd5MSxjddeu7sUBAuX4OH5TZ7-7T_wgLg&oe=64E38399'
+                  src='https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-1/364743708_1725906504494525_1533049139051175614_n.jpg?stp=cp0_dst-jpg_p60x60&_nc_cat=101&ccb=1-7&_nc_sid=fe8171&_nc_ohc=8Sgpnv7wmF8AX-FdkUa&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfAcNcgQlrT7VKu99ekHoefw-gLQZDjSHN19XMS-Hcyu8A&oe=64F74A19'
                 />
               )}
               <h2 className='hover:opacity-[0.9]'>

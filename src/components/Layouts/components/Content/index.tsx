@@ -5,7 +5,6 @@ import { faCouch } from '@fortawesome/free-solid-svg-icons'
 import './Content.css'
 import { ContentShowTime, Ghe } from '../../../../@types/ShowTimes'
 import Swal from 'sweetalert2'
-import DetailFilm from '../../../DetailFilm'
 import DetailsBooked from '../DetailsBooked'
 
 interface IshowTimesData {
@@ -13,9 +12,10 @@ interface IshowTimesData {
   setInforTicket: React.Dispatch<React.SetStateAction<Ghe[]>>
   checked: boolean
   totalMoney: number
+  seatsPositon: string[]
 }
 
-export default function Content({ showTimesData, checked, setInforTicket, totalMoney }: IshowTimesData) {
+export default function Content({ showTimesData, checked, setInforTicket, totalMoney, seatsPositon }: IshowTimesData) {
   const [selectSeats, setSelectSeats] = useState<Ghe[]>([])
 
   const handleSelectSeat = (seat: Ghe) => {
@@ -43,9 +43,6 @@ export default function Content({ showTimesData, checked, setInforTicket, totalM
     setInforTicket(selectSeats)
   }, [selectSeats])
 
-  // const handleClicked = (seatCode: number) => {
-  // }
-
   return (
     <div>
       <div>
@@ -68,7 +65,7 @@ export default function Content({ showTimesData, checked, setInforTicket, totalM
             <p className='text-[1.6rem] text-[#6a6a6a]'>Thời gian giữ vé</p>
             <h2 className='text-[#ff0000] text-[4rem] mt-2'>
               {' '}
-              <CountDown Minute='5' Seconds='0' />{' '}
+              <CountDown Minute='2' Seconds='0' />{' '}
             </h2>
           </div>
         </div>
@@ -145,7 +142,7 @@ export default function Content({ showTimesData, checked, setInforTicket, totalM
       </div>
       <div className='absolute top-[5%] right-[30%]'>
         {' '}
-        {checked && <DetailsBooked showTimesData={showTimesData} totalMoney={totalMoney} />}
+        {checked && <DetailsBooked showTimesData={showTimesData} totalMoney={totalMoney} seatsPositon={seatsPositon} />}
       </div>
     </div>
   )

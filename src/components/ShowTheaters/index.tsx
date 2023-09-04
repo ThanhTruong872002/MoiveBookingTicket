@@ -11,20 +11,19 @@ import { LoginContext } from '../../App'
 export default function ShowTheaters() {
   const { codeRoom } = useContext(LoginContext)
 
-  console.log(codeRoom)
-
   const { id } = useParams()
 
   const [detailsFilmData, setDetailsFilmData] = useState<Phim>(data)
 
   const [activeTab, setActiveTab] = useState(0)
 
-
   const getDetailsFilm = async () => {
     const res = await axios.get(
       `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`
     )
     if (res.data) {
+      console.log(res.data);
+      
       setDetailsFilmData(res.data)
     }
   }
@@ -75,11 +74,11 @@ export default function ShowTheaters() {
                       </div>
 
                       <div>
-                        <h2 className='font-[600] text-[1.8rem]'>2D Digital</h2>
+                        <h2 className='font-[600] text-[1.8rem]'>2D Digital </h2>
                         {codeRoom[activeTab].lstCumRap[activeTab].danhSachPhim[activeTab].lstLichChieuTheoPhim.map(
                           (lichchieu) => (
                             <div>
-                              <Link
+                              <NavLink
                                 key={index}
                                 style={{ textDecoration: 'none' }}
                                 to={`/checkout/${lichchieu.maLichChieu}`}
@@ -93,7 +92,7 @@ export default function ShowTheaters() {
                                     )}`}
                                   </h2>
                                 </button>
-                              </Link>
+                              </NavLink>
                             </div>
                           )
                         )}

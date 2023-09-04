@@ -28,7 +28,6 @@ export default function DefaultLayOut() {
     const res = await axios.get(`https://movieapi.cyberlearn.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${id}`)
 
     if (res) {
-      console.log(res.data)
 
       setShowTimesData(res.data?.content)
     }
@@ -47,6 +46,7 @@ export default function DefaultLayOut() {
           setInforTicket={setInforTicket}
           checked={checked}
           totalMoney={totalMoney}
+          seatsPositon={seatsPositon}
         />
       </div>
       <TicketSideBar

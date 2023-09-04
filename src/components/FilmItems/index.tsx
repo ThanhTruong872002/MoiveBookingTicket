@@ -9,7 +9,7 @@ interface IFilmsItem {
 
 const FilmsItem: React.FC<IFilmsItem> = ({ maphim, tenphim, hinhanh }) => {
   return (
-   <Link to ={`/detail/${maphim}`} target='_blank' style={{textDecoration:"none"}}>
+   <Link to ={`/detail/${maphim}`} style={{textDecoration:"none"}}>
         <div className='w-full flex items-center p-6 hover:bg-gray-300 cursor-pointer'>
           <img src={hinhanh} alt='' className='w-[85px] h-[95px] object-cover rounded-md'/>
           <div className='pl-10'>
