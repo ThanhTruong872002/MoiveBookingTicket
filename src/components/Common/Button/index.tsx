@@ -46,10 +46,13 @@ const Button: FC<ButtonProps> = ({
     changeConfirmPassword
   })
 
+  
 
   return (
     <div>
-      <button disabled= {disabled} className={classes}>{children}</button>
+      <button disabled={disabled} className={classes}>
+        {children}
+      </button>
     </div>
   )
 }

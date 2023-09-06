@@ -103,14 +103,19 @@
 }
 
 .changePassword:hover {
-  background-color:#f55960 ;
+  background-color: #f55960;
   color: #fff;
 }
 
 .changeConfirmPassword {
   width: 430px;
   height: 36px;
-  color: rgba(0, 0, 0, 0.26);
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: #f55960;
   cursor: pointer;
+  color: #fff;
+}
+
+.changeConfirmPassword:disabled {
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
 }

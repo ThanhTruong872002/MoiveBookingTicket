@@ -10,12 +10,13 @@ interface IInput {
 }
 
 
-const Input: FC<IInput> = ({ typeInput, placeholder, value, onChange }) => {
+const Input: FC<IInput> = ({ typeInput, placeholder, value, onChange, }) => {
 
-  const handleOnChange = (e:any) => {
-      onChange(e.target)
-
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e)
   }
+
+
 
   return (
     <input
