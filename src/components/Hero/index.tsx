@@ -20,17 +20,13 @@ export default function SimpleSlider() {
     <div>
       <Slider {...settings}>
         <div>
-          <img
-            src=' https://www.bhdstar.vn/wp-content/uploads/2018/03/1920x1080-2-2.jpg'
-            alt=''
-            className='h-[100%] w-[100%] object-cover'
-          />
+          <img src=' ./image/banner0.jpg' alt='' className='h-[100%] w-[100%] object-cover' />
         </div>
         <div>
           <img src='./image/banner1.png' alt='' className='h-[100%] w-[100%] object-cover' />
         </div>
         <div>
-          <img src='./image/banner2.png' alt='' className='h-[100%] w-[100%] object-cover' />
+          <img src='./image/banner2.jpg' alt='' className='h-[100%] w-[100%] object-cover' />
         </div>
         <div>
           <img src='./image/banner3.jpg' alt='' className='h-[100%] w-[100%] object-cover' />

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { LoginContext } from '../../App'
 import LogOut from '../LogOut'
 import Button from '../Common/Button'
-import "./Head.css"
+import './Head.css'
 
 export default function Header() {
   const [isFixed, setIsFixed] = useState(false)
@@ -17,20 +17,20 @@ export default function Header() {
     navigate('/SignIn')
   }
 
-   const handleScroll = () => {
-     if (window.scrollY > 0) {
-       setIsFixed(true)
-     } else {
-       setIsFixed(false)
-     }
-   }
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setIsFixed(true)
+    } else {
+      setIsFixed(false)
+    }
+  }
 
-   useEffect(() => {
-     window.addEventListener('scroll', handleScroll)
-     return () => {
-       window.removeEventListener('scroll', handleScroll)
-     }
-   }, [])
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <div
@@ -54,12 +54,7 @@ export default function Header() {
           </div>
           <div className='flex items-center gap-3 h-full'>
             <div className='profile relative cursor-pointer flex items-center gap-3 h-[50%]'>
-              {authenticated && (
-                <img
-                  className='w-[30px] h-[30px] rounded-[50%] '
-                  src='https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-1/364743708_1725906504494525_1533049139051175614_n.jpg?stp=cp0_dst-jpg_p60x60&_nc_cat=101&ccb=1-7&_nc_sid=fe8171&_nc_ohc=8Sgpnv7wmF8AX-FdkUa&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfAcNcgQlrT7VKu99ekHoefw-gLQZDjSHN19XMS-Hcyu8A&oe=64F74A19'
-                />
-              )}
+              {authenticated && <img className='w-[30px] h-[30px] rounded-[50%] ' src='https://i.pravatar.cc/30' />}
               <h2 className='hover:opacity-[0.9]'>
                 {authenticated ? (
                   <div>
