@@ -20,6 +20,7 @@ import Input from '../../components/Common/Input'
 import Button from '../../components/Common/Button'
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import { format } from 'date-fns'
 
 interface IFormData {
   password: string
@@ -104,6 +105,7 @@ const Profile = () => {
   const handleClickPersonal = () => {
     setChangeBgTickets(!changeBgTickets)
     setChangeBg(false)
+    setPersonalInfo(true)
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -170,6 +172,19 @@ const Profile = () => {
             title: 'Bạn đã thay đổi mật khẩu thành công ',
             showConfirmButton: true,
             timer: 2000
+          }).then((result) => {
+            if (result.isConfirmed) {
+              setCheckedChangeProfile(0)
+              setFormData({
+                password: '',
+                newPassword: '',
+                confirmNewPassword: '',
+                account: profile?.taiKhoan,
+                phoneNumber: profile?.soDT,
+                email: profile?.email,
+                customerName: profile?.hoTen
+              })
+            }
           })
         } else {
           Swal.fire({
@@ -177,16 +192,20 @@ const Profile = () => {
             title: 'Bạn đã thay đổi thông tin cá nhân thành công ',
             showConfirmButton: true,
             timer: 2000
+          }).then((result) => {
+            if (result.isConfirmed) {
+              setCheckedChangeProfile(0)
+            }
           })
         }
       }
     } catch (error) {
-       Swal.fire({
-         icon: 'error',
-         title: "error",
-         showConfirmButton: true,
-         timer: 2000
-       })
+      Swal.fire({
+        icon: 'error',
+        title: 'error',
+        showConfirmButton: true,
+        timer: 2000
+      })
     }
   }
 
@@ -221,6 +240,8 @@ const Profile = () => {
     ]
   })
 
+  console.log(usersProfile.thongTinDatVe[9])
+
   useEffect(() => {
     const getProfile = async () => {
       const res = await axios.post('https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan', {
@@ -233,10 +254,10 @@ const Profile = () => {
     }
 
     getProfile()
-  })
+  }, [])
 
   const changeBgSideBar = changleBg ? 'bg-[#f55960] text-white transition-all' : ''
-  const changeBgTicketStyle = changeBgTickets ? 'bg-[#f55960] text-white transition-all' : ''
+  const changeBgTicketStyle = changeBgTickets ? 'bg-[#f55960] text-white transi9tion-all' : ''
 
   return (
     <div>
@@ -245,12 +266,13 @@ const Profile = () => {
           <img
             src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAABNVBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////7QibkNivkNCn/+/v9q577Si/+8/L/7uz62tj8jHvvh4D8g3HqX1bMzc37SC3Rvrv+9/bwkozsbVn/8/HMzc7kOS7mOyW/LSP+8O/5y8joUkj8QibvgXr8/f35+frQ0ND5SS/iNSrYMyj9ppnQMSb39vbg39/W1tbfNCnHLyT//fz9+fjv7+/8qZzwPSbz8/Pr6+vn5+fj4+Pb29v6xsLyopr5opTnnJHhlIj7Ryz+6ef9rqP0qaH5UzrlOjD7RSnqOyW6KyL/4t3kz8zgzcrQtrP9tar9sqfte3TCd3L6emftbVrsbFnpUj3mQjgGeX2GAAAAF3RSTlMA+9EF9vDruKakj2lPSS8sGQ3i4b69OIta07gAAAM+SURBVGje1drpUhNBFIbhnuwrYe9JIIoLERQJqAkkJmELsqNsIu77/V+CJrH8JsxUf52R6SrfG3iqq7t/nSOchXPpZChmyX/KioWS6VxYeDeSSYwSQBsaTWRGPIhwNh6RN1gknnWdZjgVlTdcNDXcbwyNywAaH3IakyEZSKFJGEPM8K/8PcvwhAysiT/3Ek7JAEv13lg2KgMsmu3+wbgMtHjnV2YiMtAiGSHCCRlwibDIjcmAG8uJtCUDzkqLpAy8pAjJwAuJmAy8mLBk4FlCGuh/QZrtilTEkJnzOW7srK20qqfTt30iM/cfz1OluTY7u/D+q31PoQiVUShQpXrw23jw3bZVilAZ+TxTqq2O8dC2lYpQGkyp7MNQKEJlUGVvBYZCEQqDKrswlIpQGExpw1ArghpQ3I8XBhSOwKBK9QAGUYTKgJI/cj9eGEwRKgPIk2XX44VBFaFtzG05jb0FGFQRusbSs+694PHCoIrQNpy334ZBFSDccL6xnTUYXAHCDShNGHqK0DWgVA9w51wBwg0olRYMTUVoGlBaKzA0FaE0fh72DFRrfPnwTcuAAuSo4HWQ056BGlflH09tVycXl7ar4uF15NbdvFt5PX/4Oe+sflVetD2M7XevVl3G9BQQLwVMoc8olxdxDnTxtrIPBQaQPkXZOoz+Lo+nKntQYAAhCowNGNcqPZ+Suy+hwACipdRgeCttKDCA6Ci1RtdQKTtdBQYQXaVnqJXm0SoMF0KVWp0YHWVLVs+LMFwIU+obHYMox1ty81OxBAMIUWDQTjrKxzMYQBQKHi/+ObuXzU3JESgwGjCIMi2RA+FKDQZFzrQQKHhY3MAf9EaoUn/j1wDClHX/BhCi1F74N4AQxafBESh+DY5A8W1wBMod7f8BQxNBj6BQgyH8LNxgCFe4QRGucIMjXOEGR+jt87fLEa5wgyNc4QZHuMINjnCFGxzhCjc4whVucIQr3OAIV7jBEa5wgyNcgaEfRhuDKKWBDAtDmgGU0jYMjWIYN+kqMHQLYXCmrRRh6JUcfAS4tDygYaWNDDONjGVNDJiNjMpNDP2NrC+YWMQwsVJiYjnGxJqPiYUlE6tXRpfIjKzD/QKIj6Xp8VGBdwAAAABJRU5ErkJggg=='
             alt='Logo'
-            className='inline-block w-[50px] h-[50px] object-cover'
+            className='transition-all cursor-pointer inline-block w-[50px] h-[50px] object-cover'
+            onClick={() => navigate('/')}
           />
         </div>
         <h2 className='font-[600] text-[2.2rem]'>THÔNG TIN CÁ NHÂN </h2>
 
-        <div className='font-[600] text-[1.8rem] flex items-center gap-1' onClick={handleLogout}>
+        <div className='cursor-pointer font-[600] text-[1.8rem] flex items-center gap-1' onClick={handleLogout}>
           Đăng xuất
           <LogOutIcon />
         </div>
@@ -264,8 +286,8 @@ const Profile = () => {
               alt=''
               className='ml-6 w-[100px] h-[100px] object-cover rounded-[50%] '
             />
-            <h2 className='font-[600] mt-2'>{profile?.taiKhoan}</h2>
-            <p className='text-[1.4rem]'>{profile?.maLoaiNguoiDung}</p>
+            <h2 className='font-[600] mt-2 mt-3'>{profile?.taiKhoan}</h2>
+            <p className='text-[1.4rem] mt-3'>{profile?.maLoaiNguoiDung}</p>
           </div>
           <div className='pl-10 mt-6'>
             <div className='flex items-center gap-3'>
@@ -289,33 +311,32 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className='w-[80%] p-10 flex gap-10'>
-          <div className='flex flex-col gap-20 w-[300px] h-[250px] p-10 shadow-md'>
-            <div
-              onClick={() => setCheckedChangeProfile(0)}
-              className='flex gap-4 cursor-pointer w-[100%] h-[46px] hover:opacity-[.7]'
-            >
-              <FontAwesomeIcon icon={faUser} />
-              <p>Thông tin cá nhân</p>
-            </div>
-            <div
-              onClick={handleToChangePassword}
-              className='flex gap-4 cursor-pointer w-[100%] h-[46px] hover:opacity-[.7]'
-            >
-              <FontAwesomeIcon icon={faUnlock} />
-              <p>Thay đổi mật khẩu </p>
-            </div>
-            <div
-              onClick={() => setCheckedChangeProfile(2)}
-              className='flex gap-4 cursor-pointer w-[100%] h-[46px] hover:opacity-[.7]'
-            >
-              <FontAwesomeIcon icon={faGear} />
-              <p>Thay đổi thông tin cá nhân </p>
-            </div>
-          </div>
-
-          {!personalInfo && (
-            <>
+        {!personalInfo && (
+          <>
+            <div className='w-[80%] p-10 flex gap-10'>
+              <div className='flex flex-col gap-20 w-[300px] h-[250px] p-10 shadow-md'>
+                <div
+                  onClick={() => setCheckedChangeProfile(0)}
+                  className='flex gap-4 cursor-pointer w-[100%] h-[46px] hover:opacity-[.7]'
+                >
+                  <FontAwesomeIcon icon={faUser} />
+                  <p>Thông tin cá nhân</p>
+                </div>
+                <div
+                  onClick={handleToChangePassword}
+                  className='flex gap-4 cursor-pointer w-[100%] h-[46px] hover:opacity-[.7]'
+                >
+                  <FontAwesomeIcon icon={faUnlock} />
+                  <p>Thay đổi mật khẩu </p>
+                </div>
+                <div
+                  onClick={() => setCheckedChangeProfile(2)}
+                  className='flex gap-4 cursor-pointer w-[100%] h-[46px] hover:opacity-[.7]'
+                >
+                  <FontAwesomeIcon icon={faGear} />
+                  <p>Thay đổi thông tin cá nhân </p>
+                </div>
+              </div>
               <div className='w-[880px] h-[620px] shadow-md p-10 transition-all'>
                 {checkedChangeProfile === 0 && (
                   <>
@@ -498,9 +519,57 @@ const Profile = () => {
                   </form>
                 )}
               </div>
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
+
+        {personalInfo && (
+          <div className='w-[80%]'>
+            <div className='p-10 shadow-md w-[95%] mx-auto mt-10'>
+              <div>
+                <div className='font-[600] text-[2rem] '>Thông tin đặt vé</div>
+                <div className='border-t-[1px] border-solid border-[#ccc] mt-10'></div>
+              </div>
+              <table className='mt-10'>
+                <tr className=' text-[1.4rem] bg-[#f55960] text-[#fff]'>
+                  <td className='p-10 w-[220px]'>Tên phim</td>
+                  <td className='w-[150px] text-center'>Ngày đặt</td>
+                  <td className='w-[160px] text-center px-2'>Thời lượng phim</td>
+                  <td className='w-[220px] text-center'>Rạp</td>
+                  <td className='w-[140px] text-center'>Số ghế</td>
+                  <td className='w-[110px]'>Mã Vé</td>
+                  <td className='w-[80px]'>Giá vé </td>
+                </tr>
+
+                {usersProfile.thongTinDatVe.map(
+                  (listSeats) => (
+                    <tr className='pl-3 text-[1.4rem]'>
+                      <td className='py-10 pl-4 leading-8'>{listSeats.tenPhim}</td>
+                      <td className='text-center leading-8'>
+                        {`${format(new Date(listSeats.ngayDat), 'dd/MM/yyyy')}
+                        `}
+                      </td>
+                      <td className='text-center'>{listSeats.thoiLuongPhim} phút</td>
+                      <>
+                        <td className='text-center leading-8'>{listSeats.danhSachGhe[0].tenHeThongRap}</td>
+                        <td className='flex flex-wrap gap-2 justify-center mr-3 w-[150px]'>
+                          {listSeats.danhSachGhe.map((res) => (
+                            <div className='flex justify-center items-center  w-[32px] h-[20px] bg-[#f55960] text-white rounded-md font-[500]'>
+                              {res.tenGhe}
+                            </div>
+                          ))}
+                        </td>
+                      </>
+                      <td className=' w-[120px]'>{listSeats.maVe}</td>
+                      <td>{listSeats.giaVe.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                    </tr>
+                  )
+                  // ))
+                )}
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
