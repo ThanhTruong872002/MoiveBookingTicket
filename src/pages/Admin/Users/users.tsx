@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import { IUser } from '../../../@types/User'
 import axios from 'axios'
+import { ArrowLeftIcon, ArrowRightIcon } from '../../../components/Common/Icons'
 
 const TABLE_HEAD = ['Tài khoản', 'Mật khẩu', 'Họ Tên', 'Email', 'SĐT', 'Thao Tác']
 
@@ -29,6 +30,9 @@ export default function Users() {
       maLoaiNguoiDung: '',
     }
   ])
+  const [changeWidthTable, setChangeWidthTable] = useState(true)
+
+  // const []
 
   const getListUsers = async () => {
     const res = await axios.get(
@@ -46,30 +50,61 @@ export default function Users() {
   getListUsers()
     
   }, [])
+
   
 
+  const changeWidth = changeWidthTable ? "w-[95%]" : "w-[85%]"
 
 
   return (
     <div className='flex h-[100vh]'>
-      <div className='w-[15%] bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] py-10'>
-        <img src='' alt='' />
-        <div className='flex gap-10 items-center cursor-pointer h-[54px] justify-center hover:bg-[#1890ff]'>
-          <FontAwesomeIcon icon={faUser} size='xl' style={{ color: 'white' }} />
-          <h2 className='text-[2rem] text-white'>Users</h2>
+      {!changeWidthTable && (
+        <div className='w-[15%] flex flex-col justify-between bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] py-10'>
+          <div>
+            <div className='flex gap-10 items-center cursor-pointer h-[54px] justify-center hover:bg-[#1890ff]'>
+              <FontAwesomeIcon icon={faUser} size='xl' style={{ color: 'white' }} />
+              <h2 className='text-[2rem] text-white'>Users</h2>
+            </div>
+            <div className='flex gap-10 items-center mt-10 cursor-pointer h-[54px] justify-center hover:bg-[#1890ff] mr-3'>
+              <FontAwesomeIcon icon={faFilm} size='xl' style={{ color: 'white' }} />
+              <h2 className='text-[2rem] text-white'>Film</h2>
+            </div>
+          </div>
+          <div
+            className='flex justify-center cursor-pointer p-4'
+            onClick={() => setChangeWidthTable(!changeWidthTable)}
+          >
+            <ArrowLeftIcon />
+          </div>
         </div>
-        <div className='flex gap-10 items-center mt-10 cursor-pointer h-[54px] justify-center hover:bg-[#1890ff] mr-3'>
-          <FontAwesomeIcon icon={faFilm} size='xl' style={{ color: 'white' }} />
-          <h2 className='text-[2rem] text-white'>Film</h2>
+      )}
+
+      {changeWidthTable && (
+        <div className='w-[5%]  flex flex-col justify-between bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] py-10'>
+          <div>
+            <div className='flex gap-10 items-center cursor-pointer h-[54px] justify-center hover:bg-[#1890ff]'>
+              <FontAwesomeIcon icon={faUser} size='xl' style={{ color: 'white' }} />
+            </div>
+            <div className='flex gap-10 items-center mt-10 cursor-pointer h-[54px] justify-center hover:bg-[#1890ff] mr-3'>
+              <FontAwesomeIcon icon={faFilm} size='xl' style={{ color: 'white' }} />
+            </div>
+          </div>
+          <div
+            className='flex justify-center cursor-pointer p-4'
+            onClick={() => setChangeWidthTable(!changeWidthTable)}
+          >
+            <ArrowRightIcon />
+          </div>
         </div>
-      </div>
-      <div className='w-[85%]'>
+      )}
+
+      <div className={`${changeWidth}`}>
         <div className='h-[80px] shadow-md flex justify-end items-center p-10'>
-          <h2 className='text-[1.8rem] font-[500]'>Đăng xuất</h2>
+          <h2 className='text-[1.8rem] font-[500] cursor-pointer'>Đăng xuất</h2>
         </div>
         <div className='pr-10 p-10'>
           <h2 className='text-[3rem] font-[600] mt-6 '>Quản Lý Người Dùng</h2>
-          <div className='flex justify-between mt-32 mb-10'>
+          <div className='flex justify-between mt-20 mb-10'>
             {' '}
             <button className='w-[170px] h-[40px] cursor-pointer font-[500] border-[1px] border-solid border-[#ccc] p-3'>
               Thêm Người Dùng
@@ -85,12 +120,12 @@ export default function Users() {
               </div>
             </div>
           </div>
-          <Card className=' w-full h-[680px] overflow-scroll'>
+          <Card className=' w-full h-[500px] overflow-y-scroll overflow-x-hidden'>
             <table className='w-full min-w-max table-auto text-left'>
               <thead>
                 <tr>
                   {TABLE_HEAD.map((head) => (
-                    <th key={head} className='border-b border-blue-gray-200  py-14 px-4 bg-gray-200'>
+                    <th key={head} className='border-b border-blue-gray-200  py-14 px-4  w-[180px] bg-gray-200'>
                       <Typography variant='small' color='blue-gray' className='font-normal text-[1.8rem] leading-none '>
                         {head}
                       </Typography>
@@ -101,8 +136,8 @@ export default function Users() {
               <tbody>
                 {listUsers.map((users) => (
                   <tr className='even:bg-blue-gray-50/50 leading-10 '>
-                    <td className='p-4'>
-                      <Typography variant='small' color='blue-gray' className='font-normal'>
+                    <td className='p-4 '>
+                      <Typography variant='small' color='blue-gray' className='font-normal '>
                         {users.taiKhoan}
                       </Typography>
                     </td>
@@ -127,10 +162,10 @@ export default function Users() {
                       </Typography>
                     </td>
                     <td className='p-4'>
-                      <Typography as='a' href='#' variant='small' color='blue-gray' className='font-medium'>
-                        <div className='flex gap-6'>
-                          <span className='text-[#1890ff]'>Edit</span>
-                          <span className='text-[#ff4f4f]'>Remove</span>
+                      <Typography variant='small' color='blue-gray' className='font-medium'>
+                        <div className='flex gap-6 '>
+                          <span className='text-[#1890ff] cursor-pointer'>Edit</span>
+                          <span className='text-[#ff4f4f] cursor-pointer'>Remove</span>
                         </div>
                       </Typography>
                     </td>
