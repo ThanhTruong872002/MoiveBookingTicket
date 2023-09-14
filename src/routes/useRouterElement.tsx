@@ -6,6 +6,7 @@ import { LoginContext } from '../App'
 import Details from '../pages/Details'
 import Checkout from '../pages/Checkout'
 import Profile from '../pages/Profile'
+import Admin from '../pages/Admin'
 
 function ProtectedRouter() {
   const { authenticated } = useContext(LoginContext)
@@ -44,6 +45,10 @@ export default function useRouterElement() {
     {
       path: '/profile',
       element: <Profile/>
+    },
+    {
+      path: '/admin',
+      element:<Admin/>
     }
   ])
   return routerElemnts
