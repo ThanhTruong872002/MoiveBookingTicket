@@ -7,6 +7,7 @@ import Details from '../pages/Details'
 import Checkout from '../pages/Checkout'
 import Profile from '../pages/Profile'
 import Admin from '../pages/Admin'
+import { profile } from 'console'
 
 function ProtectedRouter() {
   const { authenticated } = useContext(LoginContext)
@@ -16,6 +17,15 @@ function ProtectedRouter() {
 function RejectedRoute() {
   const { authenticated } = useContext(LoginContext)
   return !authenticated ? <Outlet /> : <Navigate to='/' />
+}
+
+function AdminRoute() {
+  const { profile } = useContext(LoginContext)
+  if (profile?.maLoaiNguoiDung === 'QuanTri') {
+    return <Outlet />
+  } else {
+    return <Navigate to='/' />
+  }
 }
 
 export default function useRouterElement() {
@@ -29,7 +39,7 @@ export default function useRouterElement() {
       element: <RejectedRoute />,
       children: [
         {
-          path: '/SignIn',
+          path: '/signIn',
           element: <SignIn />
         }
       ]
@@ -40,15 +50,21 @@ export default function useRouterElement() {
     },
     {
       path: '/checkout/:id',
-      element: <Checkout/>
+      element: <Checkout />
     },
     {
       path: '/profile',
-      element: <Profile/>
+      element: <Profile />
     },
     {
-      path: '/admin',
-      element:<Admin/>
+      path: '',
+      element: <AdminRoute />,
+      children: [
+        {
+          path: '/admin',
+          element: <Admin />
+        }
+      ]
     }
   ])
   return routerElemnts

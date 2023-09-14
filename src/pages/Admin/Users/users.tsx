@@ -1,63 +1,89 @@
-import React, {useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Typography } from '@material-tailwind/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import { IUser } from '../../../@types/User'
 import axios from 'axios'
 import { ArrowLeftIcon, ArrowRightIcon } from '../../../components/Common/Icons'
+import Pagination from './Pagination'
 
 const TABLE_HEAD = ['Tài khoản', 'Mật khẩu', 'Họ Tên', 'Email', 'SĐT', 'Thao Tác']
 
-
-interface IInforUser {
+interface User {
   taiKhoan: string
-  hoTen: string
+  matKhau: string
   email: string
   soDt: string
-  matKhau: string
+  maNhom: string | null
   maLoaiNguoiDung: string
+  hoTen: string
 }
 
+interface ApiResponse {
+  currentPage: number
+  count: number
+  totalPages: number
+  totalCount: number
+  items: User[]
+}
 export default function Users() {
-
-  const [listUsers, setListUsers] = useState<IInforUser[]>([
+  const [listUsers, setListUsers] = useState<User[]>([
     {
       taiKhoan: '',
-      hoTen: '',
+      matKhau: '',
       email: '',
       soDt: '',
-      matKhau: '',
+      maNhom: null,
       maLoaiNguoiDung: '',
+      hoTen: ''
     }
   ])
+
+  const [pagination, setPagination] = useState<ApiResponse>({
+    currentPage: 0,
+    count: 0,
+    totalPages: 0,
+    totalCount: 0,
+    items: [
+      {
+        taiKhoan: '',
+        matKhau: '',
+        email: '',
+        soDt: '',
+        maNhom: null,
+        maLoaiNguoiDung: '',
+        hoTen: ''
+      }
+    ]
+  })
+  
+  
+
   const [changeWidthTable, setChangeWidthTable] = useState(true)
 
   // const []
 
-  const getListUsers = async () => {
+  const getListUsers = async (index:number) => {
     const res = await axios.get(
-      'https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01'
+      `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP01&soTrang=${index}&soPhanTuTrenTrang=10`
     )
-    if(res) {
-      console.log(res.data);
-      setListUsers(res.data)
+    if (res) {
+      // console.log(res.data)
+      setListUsers(res.data.items)
+      setPagination(res.data)
     }
   }
+
   
 
   useEffect(() => {
-    
-  getListUsers()
-    
+    getListUsers(1)
   }, [])
 
-  
-
-  const changeWidth = changeWidthTable ? "w-[95%]" : "w-[85%]"
-
+  const changeWidth = changeWidthTable ? 'w-[95%]' : 'w-[85%]'
 
   return (
-    <div className='flex h-[100vh]'>
+    <div className='flex h-auto'>
       {!changeWidthTable && (
         <div className='w-[15%] flex flex-col justify-between bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] py-10'>
           <div>
@@ -102,7 +128,7 @@ export default function Users() {
         <div className='h-[80px] shadow-md flex justify-end items-center p-10'>
           <h2 className='text-[1.8rem] font-[500] cursor-pointer'>Đăng xuất</h2>
         </div>
-        <div className='pr-10 p-10'>
+        <div className='pr-10 p-4'>
           <h2 className='text-[3rem] font-[600] mt-6 '>Quản Lý Người Dùng</h2>
           <div className='flex justify-between mt-20 mb-10'>
             {' '}
@@ -120,12 +146,12 @@ export default function Users() {
               </div>
             </div>
           </div>
-          <Card className=' w-full h-[500px] overflow-y-scroll overflow-x-hidden'>
-            <table className='w-full min-w-max table-auto text-left'>
-              <thead>
+          <Card className=' w-full h-[550px] overflow-hidden'>
+            {/* <table className='w-full min-w-max table-auto text-left text-[1.8rem]'>
+              <thead className='sticky top-0'>
                 <tr>
                   {TABLE_HEAD.map((head) => (
-                    <th key={head} className='border-b border-blue-gray-200  py-14 px-4  w-[180px] bg-gray-200'>
+                    <th key={head} className='border-b border-blue-gray-200  py-8 px-4 bg-gray-200'>
                       <Typography variant='small' color='blue-gray' className='font-normal text-[1.8rem] leading-none '>
                         {head}
                       </Typography>
@@ -136,33 +162,33 @@ export default function Users() {
               <tbody>
                 {listUsers.map((users) => (
                   <tr className='even:bg-blue-gray-50/50 leading-10 '>
-                    <td className='p-4 '>
-                      <Typography variant='small' color='blue-gray' className='font-normal '>
+                    <td className='p-4'>
+                      <Typography color='blue-gray' className='font-normal '>
                         {users.taiKhoan}
                       </Typography>
                     </td>
                     <td className='p-4'>
-                      <Typography variant='small' color='blue-gray' className='font-normal'>
+                      <Typography color='blue-gray' className='font-normal'>
                         {users.matKhau}
                       </Typography>
                     </td>
                     <td className='p-4'>
-                      <Typography variant='small' color='blue-gray' className='font-normal'>
+                      <Typography color='blue-gray' className='font-normal'>
                         {users.hoTen}
                       </Typography>
                     </td>
                     <td className='p-4'>
-                      <Typography variant='small' color='blue-gray' className='font-normal'>
+                      <Typography color='blue-gray' className='font-normal'>
                         {users.email}
                       </Typography>
                     </td>
                     <td className='p-4'>
-                      <Typography variant='small' color='blue-gray' className='font-normal'>
+                      <Typography color='blue-gray' className='font-normal'>
                         {users.soDt}
                       </Typography>
                     </td>
                     <td className='p-4'>
-                      <Typography variant='small' color='blue-gray' className='font-medium'>
+                      <Typography color='blue-gray' className='font-medium'>
                         <div className='flex gap-6 '>
                           <span className='text-[#1890ff] cursor-pointer'>Edit</span>
                           <span className='text-[#ff4f4f] cursor-pointer'>Remove</span>
@@ -172,7 +198,14 @@ export default function Users() {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table> */}
+            <Pagination
+              count={pagination.count}
+              currentPage={pagination.currentPage}
+              totalCount={pagination.totalCount}
+              totalPage={pagination.totalPages}
+              getListUsers={getListUsers}
+            />
           </Card>
         </div>
       </div>
