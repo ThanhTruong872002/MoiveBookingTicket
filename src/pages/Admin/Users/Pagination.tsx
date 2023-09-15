@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useState } from 'react'
 
 interface IPagination {
   count: number
@@ -9,22 +9,29 @@ interface IPagination {
 }
 
 const Pagination: FC<IPagination> = ({ count, currentPage, totalCount, totalPage, getListUsers }) => {
+  const [activeButton, setActiveButton] = useState<number | null>(null)
+
   function PaginationButton() {
+    const ListPage = []
+
     for (let i = 1; i <= totalPage; i++) {
-       (
-          <button
-            onClick={() => getListUsers(i)}
-            aria-current='page'
-            className='relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-md font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-          >
-            1
-          </button>
-        )
+      ListPage.push(
+        <button
+          onClick={() => {
+            getListUsers(i)
+            setActiveButton(i)
+          }}
+          aria-current='page'
+          className={`relative z-10 inline-flex items-center ${activeButton === i ? "bg-indigo-600" : "bg-black"}  px-4 py-2 text-md font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+        >
+          {i}
+        </button>
+      )
     }
+    return ListPage.length > 0 ? ListPage : null
   }
 
-  console.log(totalPage);
-  
+  console.log(totalPage)
 
   return (
     <div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
@@ -44,13 +51,13 @@ const Pagination: FC<IPagination> = ({ count, currentPage, totalCount, totalPage
       </div>
       <div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
         <div>
-          <p className='flex gap-2 text-md text-gray-700'>
+          <p className='flex gap-2 text-md text-gray-700 font-[600]'>
             Showing
             <span className='font-medium'>1</span>
             to
             <span className='font-medium'>10</span>
             of
-            <span className='font-medium'>97</span>
+            <span className='font-medium'>{totalPage}</span>
             results
           </p>
         </div>
@@ -69,44 +76,7 @@ const Pagination: FC<IPagination> = ({ count, currentPage, totalCount, totalPage
                 />
               </svg>
             </a>
-            {
-                PaginationButton() 
-
-            }
-           
-            <a
-              href='#'
-              className='relative inline-flex items-center px-4 py-2 text-md font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
-            >
-              2
-            </a>
-            <a
-              href='#'
-              className='relative hidden items-center px-4 py-2 text-md font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex'
-            >
-              3
-            </a>
-            <span className='relative inline-flex items-center px-4 py-2 text-md font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0'>
-              ...
-            </span>
-            <a
-              href='#'
-              className='relative hidden items-center px-4 py-2 text-md font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex'
-            >
-              8
-            </a>
-            <a
-              href='#'
-              className='relative inline-flex items-center px-4 py-2 text-md font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
-            >
-              9
-            </a>
-            <a
-              href='#'
-              className='relative inline-flex items-center px-4 py-2 text-md font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
-            >
-              10
-            </a>
+            {PaginationButton()}
             <a
               href='#'
               className='relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'

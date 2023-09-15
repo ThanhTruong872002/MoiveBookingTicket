@@ -56,25 +56,19 @@ export default function Users() {
       }
     ]
   })
-  
-  
 
   const [changeWidthTable, setChangeWidthTable] = useState(true)
 
-  // const []
-
-  const getListUsers = async (index:number) => {
+  const getListUsers = async (index: number) => {
     const res = await axios.get(
       `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP01&soTrang=${index}&soPhanTuTrenTrang=10`
     )
     if (res) {
-      // console.log(res.data)
+      console.log(res.data)
       setListUsers(res.data.items)
       setPagination(res.data)
     }
   }
-
-  
 
   useEffect(() => {
     getListUsers(1)
@@ -146,8 +140,8 @@ export default function Users() {
               </div>
             </div>
           </div>
-          <Card className=' w-full h-[550px] overflow-hidden'>
-            {/* <table className='w-full min-w-max table-auto text-left text-[1.8rem]'>
+          <Card className=' w-full'>
+            <table className='w-full min-w-max table-auto text-left text-[1.8rem]'>
               <thead className='sticky top-0'>
                 <tr>
                   {TABLE_HEAD.map((head) => (
@@ -198,7 +192,7 @@ export default function Users() {
                   </tr>
                 ))}
               </tbody>
-            </table> */}
+            </table>
             <Pagination
               count={pagination.count}
               currentPage={pagination.currentPage}
