@@ -34,8 +34,8 @@ export default function Header() {
 
   return (
     <div
-      className={`header ${isFixed ? 'fixed top-0 shadow-md z-10' : 'relative transition-top duration-300'} 
-    bg-[#031327] h-[100px] w-full`}
+      className={`header ${isFixed ? 'fixed top-0 shadow-md z-20' : 'relative transition-top duration-300'} 
+    bg-[#031327] h-[80px] w-full`}
     >
       <div className='container flex items-center h-full'>
         <div className='flex justify-between items-center grow h-full'>

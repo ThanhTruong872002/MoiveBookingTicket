@@ -282,7 +282,7 @@ const Profile = () => {
         <div className='w-[20%] p-4 flex flex-col items-center border-r-[1px] border-solid border-[#ccc] h-[100vh]'>
           <div className='text-center'>
             <img
-              src='https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-1/364743708_1725906504494525_1533049139051175614_n.jpg?stp=dst-jpg_p320x320&_nc_cat=101&ccb=1-7&_nc_sid=fe8171&_nc_ohc=XCdHhGBUTPEAX_Lf2k9&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfBh2NBpVJ12E5joh9ie9_7S01ViWlJkD0aSjTlS8rE1hg&oe=64FB3E99'
+              src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80'
               alt=''
               className='ml-6 w-[100px] h-[100px] object-cover rounded-[50%] '
             />

@@ -279,7 +279,7 @@ table {
 
 html {
   font-size: 62.5%;
-  
+
 }
 
 body {
@@ -293,3 +293,8 @@ body {
 }
 
 
+
+.MuiFormLabel-root {
+  font-size: 1.4rem !important ;
+  margin-top: 4px;
+}

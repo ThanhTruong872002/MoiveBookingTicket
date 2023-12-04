@@ -14,7 +14,7 @@ const Pagination: FC<IPagination> = ({ count, currentPage, totalCount, totalPage
   function PaginationButton() {
     const ListPage = []
 
-    for (let i = 1; i <= totalPage; i++) {
+    for (let i = 1; i <= totalPage - 30; i++) {
       ListPage.push(
         <button
           onClick={() => {

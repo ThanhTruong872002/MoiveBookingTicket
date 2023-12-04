@@ -7,7 +7,6 @@ import Details from '../pages/Details'
 import Checkout from '../pages/Checkout'
 import Profile from '../pages/Profile'
 import Admin from '../pages/Admin'
-import { profile } from 'console'
 
 function ProtectedRouter() {
   const { authenticated } = useContext(LoginContext)

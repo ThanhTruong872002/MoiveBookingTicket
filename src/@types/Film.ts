@@ -13,3 +13,15 @@ export interface FilmItem {
   dangchieu: any,
   sapchieu: any
 }
+
+export interface ListFilm {
+  maPhim: string,
+  tenPhim: string,
+  biDanh: string,
+  trailer: string,
+  hinhAnh: string,
+  moTa: string,
+  maNhom: string,
+  ngayKhoiChieu: string,
+  danhGia:string
+}
