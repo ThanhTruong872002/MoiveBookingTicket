@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Header />
       <Hero />
-      <div className='bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")]'>
+      <div className='bg-[#1A1D29]'>
         <SearchFilm />
         <Film />
         <ShowTime />

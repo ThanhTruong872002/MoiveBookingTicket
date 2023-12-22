@@ -63,7 +63,7 @@ export default function Users({
   return (
     <div className='flex h-auto'>
       {!changeWidthTable && (
-        <div className='w-[15%] h-[114vh] flex flex-col justify-between bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] py-10'>
+        <div className='w-[15%] h-[114vh] flex flex-col justify-between bg-[#1A1D29] py-10'>
           <div>
             <div
               onClick={() => {
@@ -93,7 +93,7 @@ export default function Users({
       )}
 
       {changeWidthTable && (
-        <div className='w-[5%]  h-[100vh]  flex flex-col justify-between bg-[url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")] py-10'>
+        <div className='w-[5%]  h-[100vh]  flex flex-col justify-between bg-[#1A1D29] py-10'>
           <div>
             <div className='flex gap-10 items-center cursor-pointer h-[54px] justify-center hover:bg-[#1890ff]'>
               <FontAwesomeIcon icon={faUser} size='xl' style={{ color: 'white' }} />
@@ -299,7 +299,7 @@ export default function Users({
             </>
           )}
 
-          {checked === 2 && !checkedSidebar && <AddFilm/>}
+          {checked === 2 && !checkedSidebar && <AddFilm />}
         </div>
       </div>
     </div>
